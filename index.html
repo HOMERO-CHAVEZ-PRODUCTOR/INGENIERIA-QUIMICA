@@ -1,0 +1,370 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduación Ingeniería Química | Generación 2026</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Paleta basada en la planeación del evento */
+            --dark-bg: #0a0a0a;      /* Negro base (Mantelería) */
+            --forest-green: #1E2F24; /* Verde bosque profundo solicitado */
+            --ivory: #f2efe6;       /* Ivory frío (Servilletas) */
+            --silver: #C0C0C2;       /* Plateado (Silla Tiffany / Numeración) */
+            --silver-muted: rgba(192, 192, 194, 0.4);
+            --text-main: var(--ivory);
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- ARQUITECTURA BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--dark-bg); 
+            font-family: 'Inter', sans-serif; 
+            color: var(--text-main); 
+            line-height: 1.8; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+
+        /* --- CONCEPTO: CÍRCULOS INFINITOS CON GROSORES VARIABLES --- */
+        .infinite-circles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .circle-element {
+            position: absolute;
+            border-style: solid;
+            border-color: var(--silver);
+            border-radius: 50%;
+            opacity: 0.25;
+            filter: drop-shadow(0 0 15px var(--silver-muted));
+            transition: var(--transition-smooth);
+        }
+
+        /* Animaciones de pulso con diferentes tiempos */
+        @keyframes pulseCircle {
+            0% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.2; }
+        }
+
+        .pulsing-slow { animation: pulseCircle 12s infinite ease-in-out; }
+        .pulsing-mid { animation: pulseCircle 8s infinite ease-in-out; }
+        .pulsing-fast { animation: pulseCircle 5s infinite ease-in-out; }
+
+        /* --- SISTEMA DE ANIMACIONES --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal { opacity: 0; animation: fadeInUp 1.5s ease forwards; }
+        .delay-1 { animation-delay: 0.4s; }
+
+        /* --- MOTOR DE VIDEO DE FONDO --- */
+        .video-background {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 0;
+            background-color: var(--forest-green); 
+        }
+
+        .video-background video {
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.45; 
+        }
+
+        /* --- SECCIÓN 1: PORTADA HERO --- */
+        .hero-layout {
+            position: relative;
+            min-height: 100vh;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--dark-bg) 100%);
+            z-index: 1;
+        }
+
+        .hero-content { 
+            position: relative; 
+            z-index: 10; 
+            max-width: 1000px;
+        }
+
+        .hero-subtitle { 
+            font-size: 1.4rem; 
+            letter-spacing: 12px; 
+            text-transform: uppercase; 
+            color: var(--silver); 
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .hero-title { 
+            font-size: clamp(3rem, 12vw, 6.5rem); 
+            margin-bottom: 40px; 
+            font-weight: 400;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
+        }
+
+        .hero-line { 
+            width: 200px; 
+            height: 1px; 
+            background: linear-gradient(90deg, transparent, var(--silver), transparent); 
+            margin: 0 auto 40px; 
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--silver-light);
+            letter-spacing: 4px;
+        }
+
+        /* --- SECCIÓN 2: INFORMACIÓN DETALLADA --- */
+        .info-container {
+            padding: 140px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 15;
+            background: linear-gradient(to bottom, var(--dark-bg), var(--forest-green), var(--dark-bg));
+        }
+
+        .gala-card {
+            max-width: 850px;
+            margin: 0 auto 100px;
+            padding: 80px 50px;
+            border: 1px solid rgba(192, 192, 194, 0.2);
+            background: rgba(255, 255, 255, 0.01);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .date-text {
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            color: var(--silver);
+            margin-bottom: 30px;
+            letter-spacing: 6px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .detail-block { margin-bottom: 60px; }
+        .detail-block:last-child { margin-bottom: 0; }
+
+        .detail-block h3 { 
+            font-size: 1rem; 
+            letter-spacing: 7px; 
+            text-transform: uppercase; 
+            color: var(--silver-dark); 
+            margin-bottom: 15px; 
+        }
+
+        .detail-block p { 
+            font-size: 2.2rem; 
+            font-weight: 300;
+            color: var(--ivory);
+        }
+
+        /* --- DISEÑO DE BOTÓN --- */
+        .premium-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 22px 60px;
+            border: 1px solid var(--silver);
+            color: var(--silver);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            background: transparent;
+        }
+
+        .premium-button:hover {
+            background: var(--silver);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(192, 192, 194, 0.2);
+        }
+
+        /* --- CONTROL DE MÚSICA ARREGLADO --- */
+        #music-btn {
+            position: fixed; 
+            bottom: 45px; 
+            right: 45px; 
+            width: 70px; 
+            height: 70px;
+            background: rgba(10, 10, 10, 0.6); 
+            border: 2px solid var(--silver); 
+            border-radius: 50%;
+            z-index: 2000; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            cursor: pointer; 
+            color: var(--silver); 
+            font-size: 1.8rem;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(5px);
+        }
+
+        #music-btn:hover { 
+            transform: scale(1.1); 
+            background: rgba(192, 192, 194, 0.1); 
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        footer { 
+            text-align: center; 
+            padding: 100px 20px; 
+            color: var(--silver-dark); 
+            font-size: 0.9rem; 
+            letter-spacing: 5px; 
+            text-transform: uppercase;
+            border-top: 1px solid rgba(192, 192, 194, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .gala-card { padding: 60px 25px; }
+            .date-text { font-size: 3rem; }
+            .detail-block p { font-size: 1.6rem; }
+            .hero-subtitle { letter-spacing: 8px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infinite-circles-canvas">
+        <div class="circle-element pulsing-slow" style="width: 500px; height: 500px; top: -150px; left: -200px; border-width: 0.5px;"></div>
+        <div class="circle-element pulsing-mid" style="width: 750px; height: 750px; top: 15%; right: -350px; border-width: 1px; opacity: 0.1;"></div>
+        <div class="circle-element pulsing-slow" style="width: 300px; height: 300px; bottom: 5%; left: 5%; border-width: 0.8px;"></div>
+        
+        <div class="circle-element pulsing-mid" style="width: 400px; height: 400px; top: 45%; left: -100px; border-width: 2px; opacity: 0.2;"></div>
+        <div class="circle-element pulsing-fast" style="width: 600px; height: 600px; top: 65%; right: -150px; border-width: 3px; opacity: 0.15;"></div>
+        
+        <div class="circle-element pulsing-mid" style="width: 220px; height: 220px; top: 12%; right: 22%; border-width: 5px; opacity: 0.35;"></div>
+        <div class="circle-element pulsing-slow" style="width: 580px; height: 580px; bottom: -220px; left: 18%; border-width: 5px; opacity: 0.08;"></div>
+
+        <div class="circle-element pulsing-fast" style="width: 120px; height: 120px; top: 35%; left: 50%; border-width: 1.5px;"></div>
+    </div>
+
+    <audio id="gradMusic" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-btn" onclick="toggleMusic()">🔇</div>
+
+    <header class="hero-layout">
+        <div class="video-background">
+            <video autoplay muted loop playsinline id="mainVideo">
+                <source src="BACKV.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content reveal">
+            <p class="hero-subtitle">Graduación 2026</p>
+            <h1 class="hero-title">Ingeniería Química</h1>
+            <div class="hero-line"></div>
+            <p class="hero-tagline">"Círculos Infinitos"</p>
+        </div>
+    </header>
+
+    <section class="info-container">
+        
+        <div class="gala-card reveal delay-1">
+            <div class="date-text">25 . ABRIL . 26</div>
+            
+            <div class="detail-block">
+                <h3>Lugar</h3>
+                <p>Hacienda El Coecillo</p>
+            </div>
+
+            <div class="detail-block">
+                <h3>Recepción</h3>
+                <p>20:00 HRS</p>
+            </div>
+
+            <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="premium-button">Ver Ubicación</a>
+        </div>
+
+        <div class="gala-card reveal">
+            <div class="date-text" style="font-size: clamp(2rem, 8vw, 3rem);">CEREMONIA RELIGIOSA</div>
+            
+            <div class="detail-block">
+                <h3>Lugar</h3>
+                <p>Iglesia El Ranchito</p>
+            </div>
+
+            <div class="detail-block">
+                <h3>Horario de Misa</h3>
+                <p>13:00 HRS</p>
+            </div>
+
+            <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="premium-button">Ver Ubicación</a>
+        </div>
+
+    </section>
+
+    <footer>
+        INGENIERÍA QUÍMICA — GENERACIÓN 2026
+    </footer>
+
+    <script>
+        const audio = document.getElementById('gradMusic');
+        const btn = document.getElementById('music-btn');
+        const video = document.getElementById('mainVideo');
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.innerHTML = "🔊";
+                }).catch(err => console.log("Interacción requerida"));
+            } else {
+                audio.pause();
+                btn.innerHTML = "🔇";
+            }
+        }
+
+        // Activación en primera interacción
+        document.body.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.innerHTML = "🔊";
+                }).catch(err => console.log("El navegador bloqueó el audio"));
+            }
+        }, { once: true });
+
+        // Garantizar Video en carga
+        window.onload = () => {
+            video.play().catch(e => console.log("Video manual"));
+        };
+    </script>
+
+</body>
+</html>
