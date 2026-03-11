@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graduación Ingeniería Química | Generación 2026</title>
+    <title>Graduación Ingeniería Química | Generación 2021-2026</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Paleta Cromática Ingeniería Química */
+            /* Paleta Bosque Mágico de Ingeniería Química */
             --base-green: #525F48;   
             --dark-bg: #0a0a0a;      
             --ivory-cold: #f8f9f5;      
@@ -17,7 +17,7 @@
             --silver-light: #E5E4E2;    
             --silver-dark: #848482;     
             --white: #ffffff;
-            --overlay-dark: rgba(0, 0, 0, 0.65);
+            --overlay-dark: rgba(0, 0, 0, 0.7);
             --transition-premium: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -35,16 +35,52 @@
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
+        /* --- MOTOR DE DESTELLOS (BOSQUE MÁGICO) --- */
+        .magic-sparkle-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .glow-point {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(1px);
+            animation: pulseGlow var(--speed) infinite ease-in-out;
+        }
+
+        /* Animación de resplandor que crece y decrece (Grande y Chico) */
+        @keyframes pulseGlow {
+            0%, 100% { 
+                transform: scale(0.3); 
+                opacity: 0.1; 
+                box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2); 
+            }
+            50% { 
+                transform: scale(1.4); 
+                opacity: 0.8; 
+                box-shadow: 0 0 25px 12px rgba(255, 255, 255, 0.4); 
+            }
+        }
+
         /* --- SISTEMA DE REVELACIÓN (ANIMACIONES) --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(60px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .reveal-element { opacity: 0; animation: fadeInUp 1.5s ease forwards; }
+        .reveal-element { opacity: 0; animation: revealUp 1.5s ease forwards; }
         .delay-1 { animation-delay: 0.4s; }
+        .delay-2 { animation-delay: 0.8s; }
 
-        /* --- SECCIÓN 1: PORTADA HERO (Regreso a back.jpeg) --- */
+        /* --- SECCIÓN 1: PORTADA HERO (IMAGEN back.jpeg) --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -57,6 +93,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         
         .hero-vignette {
@@ -73,16 +110,16 @@
         }
 
         .hero-container h1 { 
-            font-size: clamp(3.5rem, 13vw, 7rem); 
-            text-shadow: 4px 4px 40px rgba(0,0,0,0.8); 
+            font-size: clamp(3.5rem, 13vw, 7.5rem); 
+            text-shadow: 4px 4px 45px rgba(0,0,0,0.8); 
             margin-bottom: 25px;
             font-weight: 400;
             letter-spacing: -2px;
         }
 
         .hero-subtitle { 
-            font-size: 1.5rem; 
-            letter-spacing: 12px; 
+            font-size: 1.6rem; 
+            letter-spacing: 14px; 
             text-transform: uppercase; 
             margin-bottom: 60px;
             color: var(--silver-light);
@@ -96,15 +133,15 @@
             margin: 50px auto; 
         }
 
-        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (Regreso a Color Sólido #525F48) --- */
-        .unified-content-block {
+        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR #525F48) --- */
+        .unified-block {
             position: relative;
-            padding: 100px 20px 180px;
-            background-color: var(--base-green); /* Color sólido solicitado */
+            padding: 180px 20px;
+            background-color: var(--base-green);
             color: var(--white);
             text-align: center;
             z-index: 15;
-            border-top: 8px solid var(--silver);
+            border-top: 10px solid var(--silver);
         }
 
         .invitation-header h2 { 
@@ -115,9 +152,9 @@
         }
 
         .invitation-message { 
-            max-width: 850px; 
+            max-width: 900px; 
             margin: 0 auto 70px; 
-            font-size: 1.5rem; 
+            font-size: 1.6rem; 
             font-weight: 300;
             line-height: 2.2;
             opacity: 0.95;
@@ -144,23 +181,24 @@
             text-transform: uppercase;
         }
 
-        .locations-container {
-            margin-top: 120px;
-        }
+        /* CONTENEDOR DE UBICACIONES */
+        .locations-wrapper { margin-top: 140px; }
 
         .card-location {
-            max-width: 900px;
-            margin: 0 auto 80px;
+            max-width: 950px;
+            margin: 0 auto 100px;
             padding: 90px 60px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.15); /* Contraste suave sobre el verde sólido */
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
             text-align: center;
             transition: var(--transition-premium);
         }
 
+        .card-location:hover { transform: translateY(-12px); border-color: var(--silver); }
+
         .card-location h3 { 
-            font-size: 3rem; 
+            font-size: 3.2rem; 
             margin-bottom: 30px; 
             color: var(--silver-light); 
             font-weight: 400; 
@@ -174,9 +212,9 @@
             color: var(--ivory-cold); 
         }
 
-        .btn-location {
+        .btn-premium {
             display: inline-block;
-            padding: 25px 75px;
+            padding: 25px 80px;
             border: 2px solid var(--white);
             color: var(--white);
             text-decoration: none;
@@ -188,64 +226,64 @@
             background: transparent;
         }
 
-        .btn-location:hover { 
-            background: var(--silver-light); 
-            color: var(--dark-bg); 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        .btn-premium:hover { 
+            background: var(--white); 
+            color: var(--base-green); 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
         }
 
-        /* --- SECCIÓN 4: RECOMENDACIONES --- */
-        .recommendations-section {
+        /* --- SECCIÓN 4: RECOMENDACIONES (INFORMACIÓN COMPLETA) --- */
+        .recommendations-layout {
             background-color: var(--white);
             color: var(--dark-bg);
-            padding: 140px 20px;
+            padding: 180px 20px;
             text-align: center;
             position: relative;
             z-index: 15;
-            border-top: 8px solid var(--silver);
+            border-top: 10px solid var(--silver);
         }
 
-        .recommendations-section h3 { 
+        .recommendations-layout h3 { 
             font-size: clamp(3.2rem, 8vw, 4.5rem); 
             color: var(--base-green); 
             margin-bottom: 120px; 
             font-style: italic;
         }
 
-        .grid-recs {
+        .grid-recommendations {
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
             text-align: left;
         }
 
-        .rec-box { 
-            padding: 40px; 
-            border-left: 6px solid var(--base-green); 
+        .rec-card { 
+            padding: 60px; 
+            border-left: 8px solid var(--base-green); 
             background-color: #fcfcfc;
-            box-shadow: 15px 15px 50px rgba(0,0,0,0.05);
-            line-height: 1.8;
-            font-size: 1.05rem;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.06);
+            line-height: 2.1;
         }
 
-        .rec-box strong {
+        .rec-card strong {
             display: block;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
             letter-spacing: 2px;
             color: var(--base-green);
+            text-transform: uppercase;
         }
 
         /* --- CONTROL DE MÚSICA REPARADO (music.mp3) --- */
-        #music-control {
+        #music-btn {
             position: fixed; 
             bottom: 50px; 
             right: 50px; 
             width: 85px; 
             height: 85px;
-            background: var(--dark-bg); 
+            background: rgba(10, 10, 10, 0.7); 
             border: 4px solid var(--silver); 
             border-radius: 50%;
             z-index: 2500; 
@@ -253,19 +291,20 @@
             align-items: center; 
             justify-content: center;
             cursor: pointer; 
-            color: var(--silver); 
+            color: white; 
             font-size: 2.2rem; 
             transition: var(--transition-premium);
+            backdrop-filter: blur(8px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
-        #music-control:hover { transform: scale(1.15) rotate(15deg); background: var(--base-green); }
+        #music-btn:hover { transform: scale(1.15) rotate(15deg); background: var(--base-green); }
 
-        /* --- FOOTER REPLICANDO back.jpeg --- */
+        /* --- PIE DE PÁGINA (IMAGEN back.jpeg) --- */
         footer { 
             position: relative;
             text-align: center; 
-            padding: 140px 20px; 
+            padding: 160px 20px; 
             background-image: url('back.jpeg');
             background-size: cover;
             background-position: center;
@@ -277,32 +316,34 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75); 
+            background: rgba(0, 0, 0, 0.8); 
             z-index: 1;
         }
 
-        .footer-content {
+        .footer-inner {
             position: relative;
             z-index: 2;
         }
 
         @media (max-width: 768px) {
-            .date-display { font-size: 2.8rem; gap: 30px; padding: 30px 45px; }
+            .date-display { font-size: 2.8rem; gap: 30px; padding: 35px 45px; }
             .card-location { padding: 60px 30px; }
-            .grid-recs { grid-template-columns: 1fr; }
+            .grid-recommendations { grid-template-columns: 1fr; }
             .hero-container h1 { font-size: 4rem; }
-            .btn-location { padding: 22px 50px; font-size: 1rem; }
+            .btn-premium { padding: 22px 50px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="audioFondo" loop preload="auto">
+    <audio id="gradMusic" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
-    <div id="music-control" onclick="gestionarMusica()">🔇</div>
+    <div id="music-btn" onclick="gestionarMusica()">🔇</div>
 
     <header class="hero-layout">
+        <div class="magic-sparkle-overlay" id="sparkle-hero"></div>
+        
         <div class="hero-vignette"></div>
         <div class="hero-container reveal-element delay-1">
             <p class="hero-subtitle">Ingeniería Química</p>
@@ -311,98 +352,125 @@
         </div>
     </header>
 
-    <section class="unified-content-block">
-        
-        <div class="invitation-header reveal-element">
-            <h2>Generación 2026</h2>
+    <section class="unified-block">
+        <div class="magic-sparkle-overlay" id="sparkle-unified"></div>
+
+        <div class="reveal-element">
+            <h2>Generación 2021-2026</h2>
             <p class="invitation-message">
-                Ingeniería Química tiene el honor de invitarlos a la cena de graduación, un momento solemne para celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Los esperamos el día:
+                Ingeniería Química tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Los esperamos para compartir este momento inolvidable:
             </p>
             <div class="date-display">
                 <span>25</span> <span>04</span> <span>26</span>
             </div>
-            <p class="reception-label">A LAS 20:00 HRS</p>
+            <p class="reception-label">RECEPCIÓN: 18:00 HRS</p>
         </div>
 
-        <div class="locations-container">
+        <div class="locations-wrapper">
             <div class="card-location reveal-element">
-                <h3>Recepción</h3>
+                <h3>Recepción de Gala</h3>
                 <p>Hacienda El Coecillo</p>
-                <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-location">VER UBICACIÓN</a>
+                <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-premium">VER UBICACIÓN</a>
             </div>
 
             <div class="card-location reveal-element">
                 <h3>Misa de Acción de Gracias</h3>
                 <p>Iglesia El Ranchito</p>
-                <p style="font-size: 1.3rem; color: var(--silver-light); margin-top: -30px; margin-bottom: 40px;">13:00 HRS</p>
-                <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-location">VER UBICACIÓN</a>
+                <p style="font-size: 1.4rem; color: var(--silver-light); margin-top: -30px; margin-bottom: 40px;">13:00 HRS</p>
+                <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-premium">VER UBICACIÓN</a>
             </div>
         </div>
-
     </section>
 
-    <section class="recommendations-section">
+    <section class="recommendations-layout">
         <div class="reveal-element">
             <h3>Recomendaciones</h3>
-            <div class="grid-recs">
-                <div class="rec-box">
-                    <strong>CLIMA Y PRECAUCIÓN</strong>
-                    Se sugiere tomar las precauciones necesarias e ir abrigados, ya que el recinto puede presentar bajas temperaturas.
+            <div class="grid-recommendations">
+                <div class="rec-card">
+                    <strong>CLIMA Y PREVENCIÓN</strong>
+                    Se sugiere tomar las precauciones necesarias e ir abrigados, ya que el recinto puede presentar bajas temperaturas durante la noche por su ubicación.
                 </div>
-                <div class="rec-box">
-                    <strong>ACCESO ÚNICO</strong>
-                    Considere que el recinto cuenta con un solo acceso habilitado para la entrada.
+                <div class="rec-card">
+                    <strong>ACCESO AL RECINTO</strong>
+                    Considere que el recinto cuenta con un solo acceso habilitado para la entrada de invitados al evento, favor de tomar su tiempo.
                 </div>
-                <div class="rec-box">
+                <div class="rec-card">
                     <strong>VALET PARKING</strong>
-                    El servicio de estacionamiento es externo a la empresa HC y cuenta con un costo adicional por vehículo.
+                    El servicio de estacionamiento es externo a la empresa organizadora y cuenta con un costo adicional por vehículo para su comodidad.
                 </div>
-                <div class="rec-box">
+                <div class="rec-card">
                     <strong>ÁREAS DE FUMAR</strong>
-                    Recordamos que el consumo de tabaco está restringido exclusivamente a las áreas exteriores.
+                    Recordamos que el consumo de tabaco está restringido exclusivamente a las áreas exteriores designadas para tal fin dentro del recinto.
                 </div>
-                <div class="rec-box">
+                <div class="rec-card">
                     <strong>MENÚS ESPECIALES</strong>
-                    Favor de solicitar menús para veganos o condiciones de alergias directamente con su comité.
+                    Favor de solicitar menús para veganos, vegetarianos o por condiciones de alergias directamente con su comité organizador con anticipación.
                 </div>
-                <div class="rec-box">
+                <div class="rec-card">
                     <strong>CÓDIGO DE VESTIMENTA</strong>
-                    Para este evento solemne, se requiere Etiqueta Formal.
+                    Para este evento solemne, se requiere Etiqueta Formal. Agradecemos su puntualidad y presencia en esta gran gala de graduación.
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <p class="serif" style="font-size: 2.2rem; margin-bottom: 15px;">Ingeniería Química</p>
-            <p>GENERACIÓN 2022-2026</p>
+        <div class="footer-inner">
+            <p class="serif" style="font-size: 2.5rem; margin-bottom: 15px;">Ingeniería Química</p>
+            <p style="letter-spacing: 6px; font-weight: 300;">GENERACIÓN 2021-2026</p>
         </div>
     </footer>
 
     <script>
-        const miAudio = document.getElementById('audioFondo');
-        const miBoton = document.getElementById('music-control');
+        // MOTOR DE DESTELLOS MÁGICOS
+        function createMagicSparkles(containerId, count) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'glow-point';
+                
+                const size = Math.random() * 4 + 2;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const speed = Math.random() * 4 + 2.5; // Segundos
+                const delay = Math.random() * 5;
 
-        function gestionarMusica() {
-            if (miAudio.paused) {
-                miAudio.play().then(() => {
-                    miBoton.innerHTML = "🔊";
-                }).catch(err => {
-                    console.error("Error al reproducir audio:", err);
-                });
-            } else {
-                miAudio.pause();
-                miBoton.innerHTML = "🔇";
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.top = `${top}%`;
+                sparkle.style.left = `${left}%`;
+                sparkle.style.setProperty('--speed', `${speed}s`);
+                sparkle.style.animationDelay = `${delay}s`;
+
+                container.appendChild(sparkle);
             }
         }
 
-        // Intento de reproducción al primer clic del usuario
+        // Ejecutar motor en ambas capas
+        createMagicSparkles('sparkle-hero', 50);
+        createMagicSparkles('sparkle-unified', 40);
+
+        // CONTROL DE MÚSICA
+        const audio = document.getElementById('gradMusic');
+        const btn = document.getElementById('music-btn');
+
+        function gestionarMusica() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.innerHTML = "🔊";
+                }).catch(err => console.log("Interacción necesaria"));
+            } else {
+                audio.pause();
+                btn.innerHTML = "🔇";
+            }
+        }
+
+        // Activación inicial
         document.body.addEventListener('click', function() {
-            if (miAudio.paused) {
-                miAudio.play().then(() => {
-                    miBoton.innerHTML = "🔊";
-                }).catch(err => console.log("Audio esperando acción directa"));
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.innerHTML = "🔊";
+                });
             }
         }, { once: true });
     </script>
