@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,90 +9,42 @@
 
     <style>
         :root {
-            /* Paleta basada en la planeación del evento */
-            --dark-bg: #0a0a0a;      /* Negro base (Mantelería) */
-            --forest-green: #1E2F24; /* Verde bosque profundo solicitado */
-            --ivory: #f2efe6;       /* Ivory frío (Servilletas) */
-            --silver: #C0C0C2;       /* Plateado (Silla Tiffany / Numeración) */
-            --silver-muted: rgba(192, 192, 194, 0.4);
-            --text-main: var(--ivory);
-            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Paleta Cromática Ingeniería Química */
+            --base-green: #525F48;   
+            --dark-bg: #0a0a0a;      
+            --ivory-cold: #f8f9f5;      
+            --silver: #C0C0C2;          
+            --silver-light: #E5E4E2;    
+            --silver-dark: #848482;     
+            --white: #ffffff;
+            --overlay-dark: rgba(0, 0, 0, 0.65);
+            --transition-premium: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE --- */
+        /* --- ARQUITECTURA BASE Y RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             background-color: var(--dark-bg); 
             font-family: 'Inter', sans-serif; 
-            color: var(--text-main); 
-            line-height: 1.8; 
+            color: var(--white); 
+            line-height: 1.9; 
             overflow-x: hidden;
             position: relative;
         }
 
-        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- CONCEPTO: CÍRCULOS INFINITOS CON GROSORES VARIABLES --- */
-        .infinite-circles-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-
-        .circle-element {
-            position: absolute;
-            border-style: solid;
-            border-color: var(--silver);
-            border-radius: 50%;
-            opacity: 0.25;
-            filter: drop-shadow(0 0 15px var(--silver-muted));
-            transition: var(--transition-smooth);
-        }
-
-        /* Animaciones de pulso con diferentes tiempos */
-        @keyframes pulseCircle {
-            0% { transform: scale(1); opacity: 0.2; }
-            50% { transform: scale(1.1); opacity: 0.4; }
-            100% { transform: scale(1); opacity: 0.2; }
-        }
-
-        .pulsing-slow { animation: pulseCircle 12s infinite ease-in-out; }
-        .pulsing-mid { animation: pulseCircle 8s infinite ease-in-out; }
-        .pulsing-fast { animation: pulseCircle 5s infinite ease-in-out; }
-
-        /* --- SISTEMA DE ANIMACIONES --- */
+        /* --- SISTEMA DE REVELACIÓN (ANIMACIONES) --- */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .reveal { opacity: 0; animation: fadeInUp 1.5s ease forwards; }
+        .reveal-element { opacity: 0; animation: fadeInUp 1.5s ease forwards; }
         .delay-1 { animation-delay: 0.4s; }
 
-        /* --- MOTOR DE VIDEO DE FONDO --- */
-        .video-background {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; z-index: 0;
-            background-color: var(--forest-green); 
-        }
-
-        .video-background video {
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            opacity: 0.45; 
-        }
-
-        /* --- SECCIÓN 1: PORTADA HERO --- */
+        /* --- SECCIÓN 1: PORTADA HERO (Regreso a back.jpeg) --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -100,270 +52,359 @@
             align-items: center; 
             justify-content: center; 
             text-align: center;
-            padding: 40px;
+            padding: 50px;
+            background-image: url('back.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         
-        .hero-overlay {
+        .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--dark-bg) 100%);
+            background: radial-gradient(circle, transparent 25%, var(--dark-bg) 100%), var(--overlay-dark);
             z-index: 1;
         }
 
-        .hero-content { 
+        .hero-container { 
             position: relative; 
             z-index: 10; 
             max-width: 1000px;
         }
 
+        .hero-container h1 { 
+            font-size: clamp(3.5rem, 13vw, 7rem); 
+            text-shadow: 4px 4px 40px rgba(0,0,0,0.8); 
+            margin-bottom: 25px;
+            font-weight: 400;
+            letter-spacing: -2px;
+        }
+
         .hero-subtitle { 
-            font-size: 1.4rem; 
+            font-size: 1.5rem; 
             letter-spacing: 12px; 
             text-transform: uppercase; 
-            color: var(--silver); 
-            margin-bottom: 25px;
+            margin-bottom: 60px;
+            color: var(--silver-light);
             font-weight: 300;
         }
 
-        .hero-title { 
-            font-size: clamp(3rem, 12vw, 6.5rem); 
-            margin-bottom: 40px; 
-            font-weight: 400;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
-        }
-
         .hero-line { 
-            width: 200px; 
+            width: 250px; 
             height: 1px; 
             background: linear-gradient(90deg, transparent, var(--silver), transparent); 
-            margin: 0 auto 40px; 
+            margin: 50px auto; 
         }
 
-        .hero-tagline {
-            font-size: 1.5rem;
-            font-style: italic;
+        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (Regreso a Color Sólido #525F48) --- */
+        .unified-content-block {
+            position: relative;
+            padding: 100px 20px 180px;
+            background-color: var(--base-green); /* Color sólido solicitado */
+            color: var(--white);
+            text-align: center;
+            z-index: 15;
+            border-top: 8px solid var(--silver);
+        }
+
+        .invitation-header h2 { 
+            font-size: clamp(3rem, 9vw, 4.8rem); 
+            margin-bottom: 45px; 
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+
+        .invitation-message { 
+            max-width: 850px; 
+            margin: 0 auto 70px; 
+            font-size: 1.5rem; 
+            font-weight: 300;
+            line-height: 2.2;
+            opacity: 0.95;
+        }
+        
+        .date-display {
+            display: inline-flex;
+            gap: 60px;
+            font-size: clamp(3.8rem, 12vw, 5.5rem);
+            font-family: 'Playfair Display', serif;
+            padding: 40px 90px;
+            margin-bottom: 70px;
+            border-top: 3px solid var(--silver);
+            border-bottom: 3px solid var(--silver);
             color: var(--silver-light);
-            letter-spacing: 4px;
         }
 
-        /* --- SECCIÓN 2: INFORMACIÓN DETALLADA --- */
-        .info-container {
+        .reception-label {
+            letter-spacing: 8px;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            font-weight: 300;
+            color: var(--silver);
+            text-transform: uppercase;
+        }
+
+        .locations-container {
+            margin-top: 120px;
+        }
+
+        .card-location {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 90px 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.15); /* Contraste suave sobre el verde sólido */
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: var(--transition-premium);
+        }
+
+        .card-location h3 { 
+            font-size: 3rem; 
+            margin-bottom: 30px; 
+            color: var(--silver-light); 
+            font-weight: 400; 
+            letter-spacing: 2px;
+        }
+
+        .card-location p { 
+            font-size: 1.8rem; 
+            font-weight: 300; 
+            margin-bottom: 50px; 
+            color: var(--ivory-cold); 
+        }
+
+        .btn-location {
+            display: inline-block;
+            padding: 25px 75px;
+            border: 2px solid var(--white);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: var(--transition-premium);
+            background: transparent;
+        }
+
+        .btn-location:hover { 
+            background: var(--silver-light); 
+            color: var(--dark-bg); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        /* --- SECCIÓN 4: RECOMENDACIONES --- */
+        .recommendations-section {
+            background-color: var(--white);
+            color: var(--dark-bg);
             padding: 140px 20px;
             text-align: center;
             position: relative;
             z-index: 15;
-            background: linear-gradient(to bottom, var(--dark-bg), var(--forest-green), var(--dark-bg));
+            border-top: 8px solid var(--silver);
         }
 
-        .gala-card {
-            max-width: 850px;
-            margin: 0 auto 100px;
-            padding: 80px 50px;
-            border: 1px solid rgba(192, 192, 194, 0.2);
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(12px);
-            position: relative;
-            overflow: hidden;
+        .recommendations-section h3 { 
+            font-size: clamp(3.2rem, 8vw, 4.5rem); 
+            color: var(--base-green); 
+            margin-bottom: 120px; 
+            font-style: italic;
         }
 
-        .date-text {
-            font-size: clamp(2.5rem, 10vw, 4.5rem);
-            color: var(--silver);
-            margin-bottom: 30px;
-            letter-spacing: 6px;
-            font-family: 'Playfair Display', serif;
+        .grid-recs {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            text-align: left;
         }
 
-        .detail-block { margin-bottom: 60px; }
-        .detail-block:last-child { margin-bottom: 0; }
-
-        .detail-block h3 { 
-            font-size: 1rem; 
-            letter-spacing: 7px; 
-            text-transform: uppercase; 
-            color: var(--silver-dark); 
-            margin-bottom: 15px; 
+        .rec-box { 
+            padding: 40px; 
+            border-left: 6px solid var(--base-green); 
+            background-color: #fcfcfc;
+            box-shadow: 15px 15px 50px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
 
-        .detail-block p { 
-            font-size: 2.2rem; 
-            font-weight: 300;
-            color: var(--ivory);
+        .rec-box strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: var(--base-green);
         }
 
-        /* --- DISEÑO DE BOTÓN --- */
-        .premium-button {
-            display: inline-block;
-            margin-top: 40px;
-            padding: 22px 60px;
-            border: 1px solid var(--silver);
-            color: var(--silver);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: var(--transition-smooth);
-            background: transparent;
-        }
-
-        .premium-button:hover {
-            background: var(--silver);
-            color: var(--dark-bg);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(192, 192, 194, 0.2);
-        }
-
-        /* --- CONTROL DE MÚSICA ARREGLADO --- */
-        #music-btn {
+        /* --- CONTROL DE MÚSICA REPARADO (music.mp3) --- */
+        #music-control {
             position: fixed; 
-            bottom: 45px; 
-            right: 45px; 
-            width: 70px; 
-            height: 70px;
-            background: rgba(10, 10, 10, 0.6); 
-            border: 2px solid var(--silver); 
+            bottom: 50px; 
+            right: 50px; 
+            width: 85px; 
+            height: 85px;
+            background: var(--dark-bg); 
+            border: 4px solid var(--silver); 
             border-radius: 50%;
-            z-index: 2000; 
+            z-index: 2500; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             cursor: pointer; 
             color: var(--silver); 
-            font-size: 1.8rem;
-            transition: var(--transition-smooth);
-            backdrop-filter: blur(5px);
+            font-size: 2.2rem; 
+            transition: var(--transition-premium);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
-        #music-btn:hover { 
-            transform: scale(1.1); 
-            background: rgba(192, 192, 194, 0.1); 
-        }
+        #music-control:hover { transform: scale(1.15) rotate(15deg); background: var(--base-green); }
 
-        /* --- PIE DE PÁGINA --- */
+        /* --- FOOTER REPLICANDO back.jpeg --- */
         footer { 
+            position: relative;
             text-align: center; 
-            padding: 100px 20px; 
-            color: var(--silver-dark); 
-            font-size: 0.9rem; 
-            letter-spacing: 5px; 
-            text-transform: uppercase;
+            padding: 140px 20px; 
+            background-image: url('back.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white); 
             border-top: 1px solid rgba(192, 192, 194, 0.1);
         }
 
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75); 
+            z-index: 1;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
         @media (max-width: 768px) {
-            .gala-card { padding: 60px 25px; }
-            .date-text { font-size: 3rem; }
-            .detail-block p { font-size: 1.6rem; }
-            .hero-subtitle { letter-spacing: 8px; font-size: 1.1rem; }
+            .date-display { font-size: 2.8rem; gap: 30px; padding: 30px 45px; }
+            .card-location { padding: 60px 30px; }
+            .grid-recs { grid-template-columns: 1fr; }
+            .hero-container h1 { font-size: 4rem; }
+            .btn-location { padding: 22px 50px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="infinite-circles-canvas">
-        <div class="circle-element pulsing-slow" style="width: 500px; height: 500px; top: -150px; left: -200px; border-width: 0.5px;"></div>
-        <div class="circle-element pulsing-mid" style="width: 750px; height: 750px; top: 15%; right: -350px; border-width: 1px; opacity: 0.1;"></div>
-        <div class="circle-element pulsing-slow" style="width: 300px; height: 300px; bottom: 5%; left: 5%; border-width: 0.8px;"></div>
-        
-        <div class="circle-element pulsing-mid" style="width: 400px; height: 400px; top: 45%; left: -100px; border-width: 2px; opacity: 0.2;"></div>
-        <div class="circle-element pulsing-fast" style="width: 600px; height: 600px; top: 65%; right: -150px; border-width: 3px; opacity: 0.15;"></div>
-        
-        <div class="circle-element pulsing-mid" style="width: 220px; height: 220px; top: 12%; right: 22%; border-width: 5px; opacity: 0.35;"></div>
-        <div class="circle-element pulsing-slow" style="width: 580px; height: 580px; bottom: -220px; left: 18%; border-width: 5px; opacity: 0.08;"></div>
-
-        <div class="circle-element pulsing-fast" style="width: 120px; height: 120px; top: 35%; left: 50%; border-width: 1.5px;"></div>
-    </div>
-
-    <audio id="gradMusic" loop preload="auto">
+    <audio id="audioFondo" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
-    <div id="music-btn" onclick="toggleMusic()">🔇</div>
+    <div id="music-control" onclick="gestionarMusica()">🔇</div>
 
     <header class="hero-layout">
-        <div class="video-background">
-            <video autoplay muted loop playsinline id="mainVideo">
-                <source src="BACKV.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content reveal">
-            <p class="hero-subtitle">Graduación 2026</p>
-            <h1 class="hero-title">Ingeniería Química</h1>
+        <div class="hero-vignette"></div>
+        <div class="hero-container reveal-element delay-1">
+            <p class="hero-subtitle">Ingeniería Química</p>
+            <h1>Graduación 2026</h1>
             <div class="hero-line"></div>
-            <p class="hero-tagline">"Círculos Infinitos"</p>
         </div>
     </header>
 
-    <section class="info-container">
+    <section class="unified-content-block">
         
-        <div class="gala-card reveal delay-1">
-            <div class="date-text">25 . ABRIL . 26</div>
-            
-            <div class="detail-block">
-                <h3>Lugar</h3>
-                <p>Hacienda El Coecillo</p>
+        <div class="invitation-header reveal-element">
+            <h2>Generación 2026</h2>
+            <p class="invitation-message">
+                Ingeniería Química tiene el honor de invitarlos a la cena de graduación, un momento solemne para celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Los esperamos el día:
+            </p>
+            <div class="date-display">
+                <span>25</span> <span>04</span> <span>26</span>
             </div>
-
-            <div class="detail-block">
-                <h3>Recepción</h3>
-                <p>20:00 HRS</p>
-            </div>
-
-            <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="premium-button">Ver Ubicación</a>
+            <p class="reception-label">A LAS 20:00 HRS</p>
         </div>
 
-        <div class="gala-card reveal">
-            <div class="date-text" style="font-size: clamp(2rem, 8vw, 3rem);">CEREMONIA RELIGIOSA</div>
-            
-            <div class="detail-block">
-                <h3>Lugar</h3>
+        <div class="locations-container">
+            <div class="card-location reveal-element">
+                <h3>Recepción</h3>
+                <p>Hacienda El Coecillo</p>
+                <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-location">VER UBICACIÓN</a>
+            </div>
+
+            <div class="card-location reveal-element">
+                <h3>Misa de Acción de Gracias</h3>
                 <p>Iglesia El Ranchito</p>
+                <p style="font-size: 1.3rem; color: var(--silver-light); margin-top: -30px; margin-bottom: 40px;">13:00 HRS</p>
+                <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-location">VER UBICACIÓN</a>
             </div>
-
-            <div class="detail-block">
-                <h3>Horario de Misa</h3>
-                <p>13:00 HRS</p>
-            </div>
-
-            <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="premium-button">Ver Ubicación</a>
         </div>
 
     </section>
 
+    <section class="recommendations-section">
+        <div class="reveal-element">
+            <h3>Recomendaciones</h3>
+            <div class="grid-recs">
+                <div class="rec-box">
+                    <strong>CLIMA Y PRECAUCIÓN</strong>
+                    Se sugiere tomar las precauciones necesarias e ir abrigados, ya que el recinto puede presentar bajas temperaturas.
+                </div>
+                <div class="rec-box">
+                    <strong>ACCESO ÚNICO</strong>
+                    Considere que el recinto cuenta con un solo acceso habilitado para la entrada.
+                </div>
+                <div class="rec-box">
+                    <strong>VALET PARKING</strong>
+                    El servicio de estacionamiento es externo a la empresa HC y cuenta con un costo adicional por vehículo.
+                </div>
+                <div class="rec-box">
+                    <strong>ÁREAS DE FUMAR</strong>
+                    Recordamos que el consumo de tabaco está restringido exclusivamente a las áreas exteriores.
+                </div>
+                <div class="rec-box">
+                    <strong>MENÚS ESPECIALES</strong>
+                    Favor de solicitar menús para veganos o condiciones de alergias directamente con su comité.
+                </div>
+                <div class="rec-box">
+                    <strong>CÓDIGO DE VESTIMENTA</strong>
+                    Para este evento solemne, se requiere Etiqueta Formal.
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        INGENIERÍA QUÍMICA — GENERACIÓN 2026
+        <div class="footer-content">
+            <p class="serif" style="font-size: 2.2rem; margin-bottom: 15px;">Ingeniería Química</p>
+            <p>GENERACIÓN 2022-2026</p>
+        </div>
     </footer>
 
     <script>
-        const audio = document.getElementById('gradMusic');
-        const btn = document.getElementById('music-btn');
-        const video = document.getElementById('mainVideo');
+        const miAudio = document.getElementById('audioFondo');
+        const miBoton = document.getElementById('music-control');
 
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    btn.innerHTML = "🔊";
-                }).catch(err => console.log("Interacción requerida"));
+        function gestionarMusica() {
+            if (miAudio.paused) {
+                miAudio.play().then(() => {
+                    miBoton.innerHTML = "🔊";
+                }).catch(err => {
+                    console.error("Error al reproducir audio:", err);
+                });
             } else {
-                audio.pause();
-                btn.innerHTML = "🔇";
+                miAudio.pause();
+                miBoton.innerHTML = "🔇";
             }
         }
 
-        // Activación en primera interacción
+        // Intento de reproducción al primer clic del usuario
         document.body.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    btn.innerHTML = "🔊";
-                }).catch(err => console.log("El navegador bloqueó el audio"));
+            if (miAudio.paused) {
+                miAudio.play().then(() => {
+                    miBoton.innerHTML = "🔊";
+                }).catch(err => console.log("Audio esperando acción directa"));
             }
         }, { once: true });
-
-        // Garantizar Video en carga
-        window.onload = () => {
-            video.play().catch(e => console.log("Video manual"));
-        };
     </script>
 
 </body>
