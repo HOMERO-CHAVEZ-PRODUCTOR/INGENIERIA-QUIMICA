@@ -9,19 +9,19 @@
 
     <style>
         :root {
-            /* Paleta Bosque Mágico de Ingeniería Química */
+            /* Paleta Bosque Mágico Total */
             --base-green: #525F48;   
             --dark-bg: #0a0a0a;      
-            --ivory-cold: #f8f9f5;      
+            --ivory: #f8f9f5;      
             --silver: #C0C0C2;          
             --silver-light: #E5E4E2;    
-            --silver-dark: #848482;     
+            --silver-bright: #ffffff;
             --white: #ffffff;
-            --overlay-dark: rgba(0, 0, 0, 0.7);
+            --overlay-mystic: rgba(10, 10, 10, 0.7);
             --transition-premium: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE Y RESET --- */
+        /* --- reset --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -35,52 +35,74 @@
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- MOTOR DE DESTELLOS (BOSQUE MÁGICO) --- */
-        .magic-sparkle-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* --- MOTOR DE ATMÓSFERA (BOSQUE MÁGICO TOTAL) --- */
+        .magic-atmosphere {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 5;
+            z-index: 2; /* Entre fondo y contenido */
             overflow: hidden;
         }
 
-        .glow-point {
+        /* Capa 1: Niebla Mística en movimiento */
+        .mystic-fog {
+            position: absolute;
+            width: 300%; height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxnIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iNTAwIiBjeT0iNTAwIiByPSI1MDAiIGZpbGw9IiNmZmZmZmYiLz48L2c+PC9zdmc+'); /* SVG sutil de nubes */
+            opacity: 0.15;
+            animation: fogMove 60s linear infinite;
+        }
+
+        @keyframes fogMove {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Capa 2: Haces de Luz Cenital (God Rays) */
+        .god-rays {
+            position: absolute;
+            top: -50%; left: 0; width: 200%; height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 50px,
+                rgba(255, 255, 255, 0.03) 80px,
+                rgba(255, 255, 255, 0.03) 120px
+            );
+            filter: blur(10px);
+            animation: raysRotate 90s linear infinite;
+        }
+
+        @keyframes raysRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Capa 3: Luciérnagas y Destellos (Grande y Chico) */
+        .sparkle-point {
             position: absolute;
             background: white;
             border-radius: 50%;
             opacity: 0;
             filter: blur(1px);
-            animation: pulseGlow var(--speed) infinite ease-in-out;
+            animation: breatheGlow var(--t) infinite ease-in-out;
         }
 
-        /* Animación de resplandor que crece y decrece (Grande y Chico) */
-        @keyframes pulseGlow {
-            0%, 100% { 
-                transform: scale(0.3); 
-                opacity: 0.1; 
-                box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2); 
-            }
-            50% { 
-                transform: scale(1.4); 
-                opacity: 0.8; 
-                box-shadow: 0 0 25px 12px rgba(255, 255, 255, 0.4); 
-            }
+        /* Animación del resplandor: grande y chico */
+        @keyframes breatheGlow {
+            0%, 100% { transform: scale(0.3); opacity: 0.1; box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2); }
+            50% { transform: scale(1.4); opacity: 0.8; box-shadow: 0 0 25px 12px rgba(255, 255, 255, 0.5); }
         }
 
-        /* --- SISTEMA DE REVELACIÓN (ANIMACIONES) --- */
+        /* --- ANIMACIONES DE CONTENIDO --- */
         @keyframes revealUp {
             from { opacity: 0; transform: translateY(60px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .reveal { opacity: 0; animation: revealUp 1.5s ease forwards; }
+        .delay-1 { animation-delay: 0.5s; }
 
-        .reveal-element { opacity: 0; animation: revealUp 1.5s ease forwards; }
-        .delay-1 { animation-delay: 0.4s; }
-        .delay-2 { animation-delay: 0.8s; }
-
-        /* --- SECCIÓN 1: PORTADA HERO (IMAGEN back.jpeg) --- */
+        /* --- SECCIÓN 1: PORTADA HERO (BOSQUE MÁGICO INICIAL) --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -92,125 +114,88 @@
             background-image: url('back.jpeg');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             background-attachment: fixed;
+            z-index: 10;
         }
         
         .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 25%, var(--dark-bg) 100%), var(--overlay-dark);
+            background: radial-gradient(circle, transparent 10%, var(--dark-bg) 100%), var(--overlay-mystic);
             z-index: 1;
         }
 
-        .hero-container { 
-            position: relative; 
-            z-index: 10; 
-            max-width: 1000px;
-        }
-
+        .hero-container { position: relative; z-index: 10; max-width: 1000px; }
         .hero-container h1 { 
-            font-size: clamp(3.5rem, 13vw, 7.5rem); 
-            text-shadow: 4px 4px 45px rgba(0,0,0,0.8); 
-            margin-bottom: 25px;
-            font-weight: 400;
-            letter-spacing: -2px;
+            font-size: clamp(3rem, 12vw, 6.5rem); 
+            margin-bottom: 25px; 
+            font-weight: 400; 
+            letter-spacing: -2px; 
+            /* Título metálico plateado */
+            background: linear-gradient(to bottom, var(--white), var(--silver-light), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255,255,255,0.2);
         }
+        .hero-subtitle { font-size: 1.5rem; letter-spacing: 12px; text-transform: uppercase; color: var(--silver-light); margin-bottom: 60px; font-weight: 300; }
+        .hero-line { width: 250px; height: 1px; background: linear-gradient(90deg, transparent, var(--silver), transparent); margin: 0 auto; }
 
-        .hero-subtitle { 
-            font-size: 1.6rem; 
-            letter-spacing: 14px; 
-            text-transform: uppercase; 
-            margin-bottom: 60px;
-            color: var(--silver-light);
-            font-weight: 300;
-        }
-
-        .hero-line { 
-            width: 250px; 
-            height: 1px; 
-            background: linear-gradient(90deg, transparent, var(--silver), transparent); 
-            margin: 50px auto; 
-        }
-
-        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR #525F48) --- */
+        /* --- BLOQUE UNIFICADO (INVITACIÓN Y UBICACIONES SOBRE VERDE MÁGICO) --- */
         .unified-block {
             position: relative;
             padding: 180px 20px;
-            background-color: var(--base-green);
+            background-color: var(--base-green); 
             color: var(--white);
             text-align: center;
             z-index: 15;
-            border-top: 10px solid var(--silver);
+            border-top: 8px solid var(--silver);
+            overflow: hidden;
         }
 
-        .invitation-header h2 { 
-            font-size: clamp(3rem, 9vw, 4.8rem); 
-            margin-bottom: 45px; 
-            font-weight: 400;
-            letter-spacing: 3px;
+        /* Overlay para unificar el bloque verde con la atmósfera */
+        .unified-block::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.4), transparent, rgba(10,10,10,0.4));
+            z-index: 1;
         }
 
-        .invitation-message { 
-            max-width: 900px; 
-            margin: 0 auto 70px; 
-            font-size: 1.6rem; 
-            font-weight: 300;
-            line-height: 2.2;
-            opacity: 0.95;
-        }
+        .invitation-content { position: relative; z-index: 5; }
+        .invitation-header h2 { font-size: clamp(3rem, 9vw, 4.8rem); margin-bottom: 45px; font-weight: 400; letter-spacing: 3px; }
+        .invitation-txt { max-width: 850px; margin: 0 auto 70px; font-size: 1.6rem; font-weight: 300; line-height: 2.2; }
         
         .date-display {
             display: inline-flex;
             gap: 60px;
-            font-size: clamp(3.8rem, 12vw, 5.5rem);
+            font-size: clamp(3rem, 11vw, 5.5rem);
             font-family: 'Playfair Display', serif;
             padding: 40px 90px;
             margin-bottom: 70px;
             border-top: 3px solid var(--silver);
             border-bottom: 3px solid var(--silver);
             color: var(--silver-light);
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
         }
 
-        .reception-label {
-            letter-spacing: 8px;
-            font-size: 1.3rem;
-            margin-top: 30px;
-            font-weight: 300;
-            color: var(--silver);
-            text-transform: uppercase;
-        }
+        .reception-label { letter-spacing: 8px; font-size: 1.3rem; margin-top: 30px; font-weight: 300; color: var(--silver-light); text-transform: uppercase; }
 
-        /* CONTENEDOR DE UBICACIONES */
-        .locations-wrapper { margin-top: 140px; }
-
+        /* UBICACIONES EFECTO VIDRIO */
+        .locations-wrapper { margin-top: 140px; position: relative; z-index: 5; }
         .card-location {
-            max-width: 950px;
+            max-width: 900px;
             margin: 0 auto 100px;
             padding: 90px 60px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.4); /* Borde brillante */
+            background: rgba(10, 10, 10, 0.2);
+            backdrop-filter: blur(15px);
             text-align: center;
             transition: var(--transition-premium);
+            box-shadow: 0 0 40px rgba(0,0,0,0.2);
         }
-
-        .card-location:hover { transform: translateY(-12px); border-color: var(--silver); }
-
-        .card-location h3 { 
-            font-size: 3.2rem; 
-            margin-bottom: 30px; 
-            color: var(--silver-light); 
-            font-weight: 400; 
-            letter-spacing: 2px;
-        }
-
-        .card-location p { 
-            font-size: 1.8rem; 
-            font-weight: 300; 
-            margin-bottom: 50px; 
-            color: var(--ivory-cold); 
-        }
+        .card-location:hover { transform: translateY(-12px); border-color: var(--silver-bright); box-shadow: 0 0 50px rgba(255,255,255,0.15); }
+        .card-location h3 { font-size: 3rem; margin-bottom: 30px; color: var(--silver-light); font-weight: 400; letter-spacing: 2px; }
+        .card-location p { font-size: 1.8rem; font-weight: 300; margin-bottom: 50px; color: var(--ivory); }
 
         .btn-premium {
             display: inline-block;
@@ -224,33 +209,24 @@
             font-weight: 700;
             transition: var(--transition-premium);
             background: transparent;
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
         }
+        .btn-premium:hover { background: var(--white); color: var(--base-green); box-shadow: 0 15px 50px rgba(255,255,255,0.4); }
 
-        .btn-premium:hover { 
-            background: var(--white); 
-            color: var(--base-green); 
-            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
-        }
-
-        /* --- SECCIÓN 4: RECOMENDACIONES (INFORMACIÓN COMPLETA) --- */
-        .recommendations-layout {
+        /* --- SECCIÓN RECOMENDACIONES --- */
+        .rec-section {
             background-color: var(--white);
             color: var(--dark-bg);
-            padding: 180px 20px;
+            padding: 160px 20px;
             text-align: center;
             position: relative;
             z-index: 15;
             border-top: 10px solid var(--silver);
         }
 
-        .recommendations-layout h3 { 
-            font-size: clamp(3.2rem, 8vw, 4.5rem); 
-            color: var(--base-green); 
-            margin-bottom: 120px; 
-            font-style: italic;
-        }
-
-        .grid-recommendations {
+        .rec-section h3 { font-size: 3.5rem; color: var(--base-green); margin-bottom: 120px; font-style: italic; }
+        
+        .grid-recs {
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
@@ -259,93 +235,56 @@
             text-align: left;
         }
 
-        .rec-card { 
-            padding: 60px; 
+        .rec-box { 
+            padding: 55px; 
             border-left: 8px solid var(--base-green); 
             background-color: #fcfcfc;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.06);
-            line-height: 2.1;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            line-height: 2;
         }
+        .rec-box strong { display: block; font-size: 1.3rem; margin-bottom: 15px; letter-spacing: 2px; color: var(--base-green); text-transform: uppercase; }
 
-        .rec-card strong {
-            display: block;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            color: var(--base-green);
-            text-transform: uppercase;
-        }
-
-        /* --- CONTROL DE MÚSICA REPARADO (music.mp3) --- */
+        /* --- MUSICA MÁGICA --- */
         #music-btn {
-            position: fixed; 
-            bottom: 50px; 
-            right: 50px; 
-            width: 85px; 
-            height: 85px;
-            background: rgba(10, 10, 10, 0.7); 
-            border: 4px solid var(--silver); 
-            border-radius: 50%;
-            z-index: 2500; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            cursor: pointer; 
-            color: white; 
-            font-size: 2.2rem; 
-            transition: var(--transition-premium);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            position: fixed; bottom: 50px; right: 50px; width: 85px; height: 85px;
+            background: rgba(10, 10, 10, 0.6); border: 2px solid var(--silver); border-radius: 50%;
+            z-index: 2500; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: white; font-size: 2.2rem; transition: var(--transition-premium);
+            backdrop-filter: blur(8px); box-shadow: 0 0 20px rgba(255,255,255,0.2);
         }
+        #music-btn:hover { box-shadow: 0 0 30px rgba(255,255,255,0.4); }
 
-        #music-btn:hover { transform: scale(1.15) rotate(15deg); background: var(--base-green); }
-
-        /* --- PIE DE PÁGINA (IMAGEN back.jpeg) --- */
+        /* --- FOOTER (BOSQUE MÁGICO FINAL) --- */
         footer { 
-            position: relative;
-            text-align: center; 
-            padding: 160px 20px; 
-            background-image: url('back.jpeg');
-            background-size: cover;
-            background-position: center;
-            color: var(--white); 
-            border-top: 1px solid rgba(192, 192, 194, 0.1);
+            position: relative; text-align: center; padding: 140px 20px; 
+            background-image: url('back.jpeg'); background-size: cover; background-position: center;
+            color: var(--white); border-top: 1px solid rgba(192, 192, 194, 0.1);
+            z-index: 10;
         }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); 
-            z-index: 1;
-        }
-
-        .footer-inner {
-            position: relative;
-            z-index: 2;
-        }
+        footer::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); z-index: 1; }
 
         @media (max-width: 768px) {
             .date-display { font-size: 2.8rem; gap: 30px; padding: 35px 45px; }
-            .card-location { padding: 60px 30px; }
-            .grid-recommendations { grid-template-columns: 1fr; }
-            .hero-container h1 { font-size: 4rem; }
-            .btn-premium { padding: 22px 50px; font-size: 1rem; }
+            .hero-container h1 { font-size: 3.8rem; }
+            .grid-recs { grid-template-columns: 1fr; }
+            .card-location { padding: 60px 25px; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="gradMusic" loop preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <div class="magic-atmosphere">
+        <div class="mystic-fog"></div>
+        <div class="god-rays"></div>
+        <div class="sparkle-canvas" id="magic-sparkles"></div>
+    </div>
+
+    <audio id="gradMusic" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
     <div id="music-btn" onclick="gestionarMusica()">🔇</div>
 
     <header class="hero-layout">
-        <div class="magic-sparkle-overlay" id="sparkle-hero"></div>
-        
         <div class="hero-vignette"></div>
-        <div class="hero-container reveal-element delay-1">
+        <div class="hero-container reveal delay-1">
             <p class="hero-subtitle">Ingeniería Química</p>
             <h1>Graduación 2026</h1>
             <div class="hero-line"></div>
@@ -353,104 +292,110 @@
     </header>
 
     <section class="unified-block">
-        <div class="magic-sparkle-overlay" id="sparkle-unified"></div>
-
-        <div class="reveal-element">
-            <h2>Generación 2021-2026</h2>
-            <p class="invitation-message">
-                Ingeniería Química tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Los esperamos para compartir este momento inolvidable:
-            </p>
-            <div class="date-display">
-                <span>25</span> <span>04</span> <span>26</span>
-            </div>
-            <p class="reception-label">RECEPCIÓN: 18:00 HRS</p>
-        </div>
-
-        <div class="locations-wrapper">
-            <div class="card-location reveal-element">
-                <h3>Recepción de Gala</h3>
-                <p>Hacienda El Coecillo</p>
-                <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-premium">VER UBICACIÓN</a>
+        <div class="invitation-content">
+            <div class="reveal">
+                <h2>Generación 2021-2026</h2>
+                <p class="invitation-txt">
+                    Ingeniería Química tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Los esperamos para compartir este momento inolvidable:
+                </p>
+                <div class="date-display">
+                    <span>25</span> <span>04</span> <span>26</span>
+                </div>
+                <p class="reception-label">RECEPCIÓN: 18:00 HRS</p>
             </div>
 
-            <div class="card-location reveal-element">
-                <h3>Misa de Acción de Gracias</h3>
-                <p>Iglesia El Ranchito</p>
-                <p style="font-size: 1.4rem; color: var(--silver-light); margin-top: -30px; margin-bottom: 40px;">13:00 HRS</p>
-                <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-premium">VER UBICACIÓN</a>
+            <div class="locations-wrapper">
+                <div class="card-location reveal">
+                    <h3>Recepción de Gala</h3>
+                    <p>Hacienda El Coecillo</p>
+                    <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-premium">Ver Ubicación</a>
+                </div>
+
+                <div class="card-location reveal">
+                    <h3>Misa de Acción de Gracias</h3>
+                    <p>Iglesia El Ranchito</p>
+                    <p style="font-size: 1.4rem; color: var(--silver-light); margin-top: -30px; margin-bottom: 40px;">13:00 HRS</p>
+                    <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-premium">Ver Ubicación</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="recommendations-layout">
-        <div class="reveal-element">
-            <h3>Recomendaciones</h3>
-            <div class="grid-recommendations">
-                <div class="rec-card">
-                    <strong>CLIMA Y PREVENCIÓN</strong>
-                    Se sugiere tomar las precauciones necesarias e ir abrigados, ya que el recinto puede presentar bajas temperaturas durante la noche por su ubicación.
+    <section class="rec-section">
+        <div class="reveal">
+            <h3 class="serif">Recomendaciones</h3>
+            <div class="grid-recs">
+                <div class="rec-box">
+                    <strong>Clima y Precaución</strong>
+                    Se sugiere tomar las precauciones necesarias e ir abrigados, ya que el recinto puede presentar bajas temperaturas durante la noche.
                 </div>
-                <div class="rec-card">
-                    <strong>ACCESO AL RECINTO</strong>
-                    Considere que el recinto cuenta con un solo acceso habilitado para la entrada de invitados al evento, favor de tomar su tiempo.
+                <div class="rec-box">
+                    <strong>Acceso Único</strong>
+                    Considere que el recinto cuenta con un solo acceso habilitado para la entrada de todos los invitados al evento.
                 </div>
-                <div class="rec-card">
-                    <strong>VALET PARKING</strong>
+                <div class="rec-box">
+                    <strong>Valet Parking</strong>
                     El servicio de estacionamiento es externo a la empresa organizadora y cuenta con un costo adicional por vehículo para su comodidad.
                 </div>
-                <div class="rec-card">
+                <div class="rec-box">
                     <strong>ÁREAS DE FUMAR</strong>
-                    Recordamos que el consumo de tabaco está restringido exclusivamente a las áreas exteriores designadas para tal fin dentro del recinto.
+                    Recordamos que el consumo de tabaco está restringido exclusivamente a las áreas exteriores designadas para tal fin.
                 </div>
-                <div class="rec-card">
-                    <strong>MENÚS ESPECIALES</strong>
-                    Favor de solicitar menús para veganos, vegetarianos o por condiciones de alergias directamente con su comité organizador con anticipación.
+                <div class="rec-box">
+                    <strong>Menús Especiales</strong>
+                    Favor de solicitar menús para veganos, vegetarianos o por condiciones de alergias directamente con su comité organizador.
                 </div>
-                <div class="rec-card">
-                    <strong>CÓDIGO DE VESTIMENTA</strong>
-                    Para este evento solemne, se requiere Etiqueta Formal. Agradecemos su puntualidad y presencia en esta gran gala de graduación.
+                <div class="rec-box">
+                    <strong>Código de Vestimenta</strong>
+                    Para este evento solemne, se requiere Etiqueta Formal. Agradecemos su puntualidad y presencia.
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-inner">
-            <p class="serif" style="font-size: 2.5rem; margin-bottom: 15px;">Ingeniería Química</p>
+        <div style="position: relative; z-index: 2;">
+            <p class="serif" style="font-size: 2.2rem; margin-bottom: 15px;">Ingeniería Química</p>
             <p style="letter-spacing: 6px; font-weight: 300;">GENERACIÓN 2021-2026</p>
         </div>
     </footer>
 
     <script>
-        // MOTOR DE DESTELLOS MÁGICOS
-        function createMagicSparkles(containerId, count) {
-            const container = document.getElementById(containerId);
+        // GENERADOR DE DESTELLOS MÁGICOS (MÁS LLAMATIVO)
+        function generateSparkles(targetId, count) {
+            const container = document.getElementById(targetId);
             for (let i = 0; i < count; i++) {
                 const sparkle = document.createElement('div');
-                sparkle.className = 'glow-point';
+                sparkle.className = 'sparkle-point';
                 
-                const size = Math.random() * 4 + 2;
+                // Variación de tamaño y posición
+                const size = Math.random() * 6 + 2; // Puntos más grandes
                 const top = Math.random() * 100;
                 const left = Math.random() * 100;
-                const speed = Math.random() * 4 + 2.5; // Segundos
+                const speed = Math.random() * 4 + 3; // Parpadeo más lento y místico
                 const delay = Math.random() * 5;
 
                 sparkle.style.width = `${size}px`;
                 sparkle.style.height = `${size}px`;
                 sparkle.style.top = `${top}%`;
                 sparkle.style.left = `${left}%`;
-                sparkle.style.setProperty('--speed', `${speed}s`);
+                
+                // Color aleatorio sutil (blanco o verde místico pálido)
+                if (Math.random() > 0.7) {
+                    sparkle.style.background = 'rgba(160, 180, 150, 0.8)'; // Verde místico
+                }
+
+                sparkle.style.setProperty('--t', `${speed}s`);
                 sparkle.style.animationDelay = `${delay}s`;
 
                 container.appendChild(sparkle);
             }
         }
 
-        // Ejecutar motor en ambas capas
-        createMagicSparkles('sparkle-hero', 50);
-        createMagicSparkles('sparkle-unified', 40);
+        // Generar 80 destellos para un efecto muy llamativo
+        generateSparkles('magic-sparkles', 80);
 
-        // CONTROL DE MÚSICA
+        // CONTROL DE AUDIO
         const audio = document.getElementById('gradMusic');
         const btn = document.getElementById('music-btn');
 
@@ -465,8 +410,7 @@
             }
         }
 
-        // Activación inicial
-        document.body.addEventListener('click', function() {
+        document.body.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play().then(() => {
                     btn.innerHTML = "🔊";
@@ -474,6 +418,5 @@
             }
         }, { once: true });
     </script>
-
 </body>
 </html>
