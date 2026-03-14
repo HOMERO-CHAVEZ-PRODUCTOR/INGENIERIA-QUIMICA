@@ -9,8 +9,8 @@
 
     <style>
         :root {
-            /* Paleta Bosque Mágico de Ingeniería Química */
-            --base-green: #525F48;   
+            /* Paleta Bosque Profundo de Ingeniería Química */
+            --base-green: #44523A;   /* Verde Bosque Más Profundo */
             --dark-bg: #0a0a0a;      
             --ivory: #f8f9f5;      
             --silver: #C0C0C2;          
@@ -35,36 +35,44 @@
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- MOTOR DE DESTELLOS MÁGICOS (AL FRENTE - Z-INDEX SUPREMO) --- */
-        #magic-sparkles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* --- MOTOR DE DESTELLOS MÁGICOS (BOSQUE) --- */
+        #magic-sparkles-hero {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 10000; /* Por encima de todo el contenido */
+            z-index: 5; /* Sobre la imagen pero bajo el texto */
+            overflow: hidden;
         }
 
-        .sparkle-particle {
+        #magic-sparkles-footer {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1; /* Bajo el texto */
+            overflow: hidden;
+        }
+
+        .glow-point {
             position: absolute;
             background: white;
             border-radius: 50%;
             opacity: 0;
             filter: blur(1px);
-            animation: breatheGlow var(--speed) infinite ease-in-out;
+            animation: breatheSparkle var(--speed) infinite ease-in-out;
         }
 
         /* Animación del resplandor: grande y chico */
-        @keyframes breatheGlow {
+        @keyframes breatheSparkle {
             0%, 100% { 
                 transform: scale(0.3); 
                 opacity: 0.1; 
                 box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.1); 
             }
             50% { 
-                transform: scale(1.3); 
-                opacity: 0.7; 
+                transform: scale(1.4); 
+                opacity: 0.8; 
                 box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.4); 
             }
         }
@@ -77,13 +85,13 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 5; /* Por detrás de destellos pero por delante de fondos */
+            z-index: 2;
         }
 
         .fluid-line-path {
             fill: none;
             stroke: url(#mystic-gradient);
-            stroke-width: 4; /* Grosor llamativo solicitado */
+            stroke-width: 4.5; /* Grosor llamativo y protagonista */
             stroke-linecap: round;
             filter: drop-shadow(0 0 15px rgba(248, 249, 245, 0.4));
             stroke-dasharray: 2000;
@@ -101,7 +109,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .reveal-node { opacity: 0; animation: fadeInUpReveal 1.8s ease forwards; }
+        .reveal-node { opacity: 0; animation: fadeInUpReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         .delay-1 { animation-delay: 0.5s; }
         .delay-2 { animation-delay: 1s; }
 
@@ -157,17 +165,19 @@
             margin: 0 auto; 
         }
 
-        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR #525F48 + ARTE) --- */
+        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR #44523A + ARTE) --- */
         .unified-magic-block {
             position: relative;
             padding: 180px 20px;
-            background-color: var(--base-green);
+            background-color: var(--base-green); /* Verde más profundo solicitado */
             color: var(--white);
             text-align: center;
             z-index: 20;
             border-top: 10px solid var(--silver);
             overflow: hidden;
         }
+
+        /* ELIMINADA LA CAPA DE DESTELLOS EN ESTA SECCIÓN */
 
         /* SVG para líneas orgánicas llamativas en el bloque verde */
         .svg-lines-container {
@@ -322,29 +332,24 @@
             text-transform: uppercase;
         }
 
-        /* --- CONTROL DE MÚSICA REPARADO (music.mp3) --- */
-        #music-trigger {
-            position: fixed; 
-            bottom: 50px; 
-            right: 50px; 
-            width: 90px; 
-            height: 90px;
-            background: rgba(10, 10, 10, 0.85); 
+        /* --- CONTROL DE MÚSICA REPARADO --- */
+        #music-btn-container {
+            position: fixed; bottom: 50px; right: 50px; width: 90px; height: 90px;
+            border-radius: 50%; z-index: 9000; overflow: hidden;
             border: 4px solid var(--silver); 
-            border-radius: 50%;
-            z-index: 11000; /* Siempre encima de los destellos */
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            cursor: pointer; 
-            color: white; 
-            font-size: 2.5rem; 
             transition: var(--transition-premium);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
+        
+        #music-btn-container:hover { transform: scale(1.1) rotate(10deg); border-color: var(--white); }
 
-        #music-trigger:hover { transform: scale(1.15) rotate(15deg); border-color: var(--white); }
+        #music-control-ui {
+            width: 100%; height: 100%;
+            background: rgba(10, 10, 10, 0.85); 
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: white; font-size: 2.5rem; 
+            backdrop-filter: blur(10px);
+        }
 
         /* --- PIE DE PÁGINA (back.jpeg) --- */
         footer { 
@@ -378,19 +383,47 @@
             .grid-recs-layout { grid-template-columns: 1fr; }
             .hero-content h1 { font-size: 4.2rem; }
             .btn-magic { padding: 22px 50px; font-size: 1rem; }
+            .recommendations-section { padding: 120px 20px; }
+            #music-btn-container { width: 70px; height: 70px; bottom: 30px; right: 30px; border-width: 3px; }
+            #music-control-ui { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="magic-sparkles-canvas"></div>
+    <script>
+        function genSparkles(targetId, count) {
+            const container = document.getElementById(targetId);
+            if(!container) return;
+            for (let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'glow-point';
+                const size = Math.random() * 5 + 2;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const speed = Math.random() * 4 + 3;
+                const delay = Math.random() * 5;
+
+                sparkle.style.width = size + 'px';
+                sparkle.style.height = size + 'px';
+                sparkle.style.top = top + '%';
+                sparkle.style.left = left + '%';
+                sparkle.style.setProperty('--speed', speed + 's');
+                sparkle.style.animationDelay = delay + 's';
+                container.appendChild(sparkle);
+            }
+        }
+    </script>
 
     <audio id="gradAudio" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
-    <div id="music-trigger" onclick="gestionarMusica()"> static/MusicOff </div>
+    <div id="music-btn-container">
+        <div id="music-control-ui" onclick="gestionarMusica()">🔇</div>
+    </div>
 
     <header class="hero-section">
+        <div id="magic-sparkles-hero"></div>
         <div class="hero-vignette"></div>
         <div class="hero-content reveal-node delay-1">
             <p class="hero-subtitle">Ingeniería Química</p>
@@ -413,7 +446,7 @@
             <path class="fluid-line-path" d="M-100,200 C200,50 400,450 600,200 S900,-50 1100,100" />
             <path class="fluid-line-path" style="animation-delay: -3s; opacity: 0.4;" d="M-50,600 Q250,900 500,600 T1050,650" />
             <path class="fluid-line-path" style="animation-delay: -6s;" d="M0,900 C300,750 700,1050 1000,800" />
-            <path class="fluid-line-path" style="stroke-width: 2; opacity: 0.2;" d="M300,-100 Q600,500 900,1100" />
+            <path class="fluid-line-path" style="stroke-width: 2.5; opacity: 0.2;" d="M300,-100 Q600,500 900,1100" />
         </svg>
 
         <div class="invitation-body">
@@ -477,6 +510,7 @@
     </section>
 
     <footer>
+        <div id="magic-sparkles-footer"></div>
         <div class="footer-wrap">
             <p class="serif" style="font-size: 2.8rem; margin-bottom: 20px;">Ingeniería Química</p>
             <p style="letter-spacing: 8px; font-weight: 300;">GENERACIÓN 2021-2026</p>
@@ -484,58 +518,40 @@
     </footer>
 
     <script>
-        // GENERADOR DE DESTELLOS MÁGICOS (AL FRENTE)
-        function initSparkleSystem() {
-            const container = document.getElementById('magic-sparkles-canvas');
-            const total = 85;
+        // Inicializar destellos en portada y pie
+        window.onload = function() {
+            genSparkles('magic-sparkles-hero', 80);
+            genSparkles('magic-sparkles-footer', 60);
+        };
 
-            for (let i = 0; i < total; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'sparkle-particle';
-                
-                const size = Math.random() * 6 + 2;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const speed = Math.random() * 4 + 3.5;
-                const delay = Math.random() * 5;
-
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.setProperty('--speed', `${speed}s`);
-                particle.style.animationDelay = `${delay}s`;
-
-                container.appendChild(particle);
-            }
-        }
-
-        // CONTROL DE AUDIO
+        // CONTROL DE AUDIO CORREGIDO
         const audio = document.getElementById('gradAudio');
-        const btn = document.getElementById('music-trigger');
+        const btnUi = document.getElementById('music-control-ui');
 
         function gestionarMusica() {
             if (audio.paused) {
                 audio.play().then(() => {
-                    btn.innerHTML = "🔊";
-                }).catch(e => console.log("Interacción necesaria"));
+                    btnUi.innerHTML = "🔊";
+                }).catch(e => {
+                    console.log("Interacción requerida");
+                    btnUi.innerHTML = "❌"; // Feedback de error
+                });
             } else {
                 audio.pause();
-                btn.innerHTML = "🔇";
+                btnUi.innerHTML = "🔇";
             }
         }
 
-        // Activación inicial por clic
+        // Activación inteligente por clic
         document.body.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play().then(() => {
-                    btn.innerHTML = "🔊";
+                    btnUi.innerHTML = "🔊";
+                }).catch(e => {
+                    // Si falla el auto-play, mantenemos el estado mudo
                 });
             }
         }, { once: true });
-
-        // Inicializar efectos al cargar
-        window.onload = initSparkleSystem;
     </script>
 
 </body>
