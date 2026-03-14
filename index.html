@@ -15,12 +15,13 @@
             --ivory: #f8f9f5;      
             --silver: #C0C0C2;          
             --silver-light: #E5E4E2;    
+            --silver-dark: #848482;     
             --white: #ffffff;
-            --overlay-dark: rgba(0, 0, 0, 0.7);
-            --transition-premium: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            --overlay-mystic: rgba(0, 0, 0, 0.75);
+            --transition-premium: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE --- */
+        /* --- ARQUITECTURA BASE Y RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -34,40 +35,41 @@
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- MOTOR DE DESTELLOS MÁGICOS (AL FRENTE) --- */
-        #magic-sparkles-layer {
+        /* --- MOTOR DE DESTELLOS MÁGICOS (AL FRENTE - Z-INDEX SUPREMO) --- */
+        #magic-sparkles-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999; /* Máxima prioridad visual */
+            z-index: 10000; /* Por encima de todo el contenido */
         }
 
-        .sparkle-dot {
+        .sparkle-particle {
             position: absolute;
             background: white;
             border-radius: 50%;
             opacity: 0;
             filter: blur(1px);
-            animation: pulseGlow var(--speed) infinite ease-in-out;
+            animation: breatheGlow var(--speed) infinite ease-in-out;
         }
 
-        @keyframes pulseGlow {
+        /* Animación del resplandor: grande y chico */
+        @keyframes breatheGlow {
             0%, 100% { 
                 transform: scale(0.3); 
                 opacity: 0.1; 
-                box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2); 
+                box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.1); 
             }
             50% { 
-                transform: scale(1.4); 
-                opacity: 0.9; 
-                box-shadow: 0 0 25px 12px rgba(255, 255, 255, 0.6); 
+                transform: scale(1.3); 
+                opacity: 0.7; 
+                box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.4); 
             }
         }
 
-        /* --- ARTE ORGÁNICO: LÍNEAS FLUIDAS --- */
+        /* --- ARTE ORGÁNICO: LÍNEAS FLUIDAS (PROTAGONISTAS) --- */
         .organic-art-layer {
             position: absolute;
             top: 0;
@@ -75,33 +77,36 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2;
+            z-index: 5; /* Por detrás de destellos pero por delante de fondos */
         }
 
-        .fluid-line {
-            position: absolute;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawLine 8s ease-out forwards;
-            opacity: 0.4;
+        .fluid-line-path {
+            fill: none;
+            stroke: url(#mystic-gradient);
+            stroke-width: 4; /* Grosor llamativo solicitado */
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 15px rgba(248, 249, 245, 0.4));
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            animation: drawFluidLine 15s ease-in-out infinite alternate;
         }
 
-        @keyframes drawLine {
+        @keyframes drawFluidLine {
             to { stroke-dashoffset: 0; }
         }
 
-        /* --- SISTEMA DE REVELACIÓN PREMIUM --- */
-        @keyframes revealUp {
+        /* --- SISTEMA DE REVELACIÓN (ANIMACIONES) --- */
+        @keyframes fadeInUpReveal {
             from { opacity: 0; transform: translateY(80px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .reveal { opacity: 0; animation: revealUp 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        .delay-1 { animation-delay: 0.4s; }
-        .delay-2 { animation-delay: 0.8s; }
+        .reveal-node { opacity: 0; animation: fadeInUpReveal 1.8s ease forwards; }
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1s; }
 
         /* --- SECCIÓN 1: PORTADA HERO (back.jpeg) --- */
-        .hero-layout {
+        .hero-section {
             position: relative;
             min-height: 100vh;
             display: flex; 
@@ -112,25 +117,25 @@
             background-image: url('back.jpeg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax elegante */
+            background-attachment: fixed;
         }
         
         .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 15%, var(--dark-bg) 100%), var(--overlay-dark);
+            background: radial-gradient(circle, transparent 20%, var(--dark-bg) 100%), var(--overlay-mystic);
             z-index: 1;
         }
 
-        .hero-container { 
+        .hero-content { 
             position: relative; 
             z-index: 10; 
             max-width: 1100px;
         }
 
-        .hero-container h1 { 
-            font-size: clamp(3.8rem, 14vw, 7.5rem); 
-            text-shadow: 4px 4px 50px rgba(0,0,0,0.9); 
+        .hero-content h1 { 
+            font-size: clamp(3.5rem, 14vw, 7.5rem); 
+            text-shadow: 0 0 40px rgba(0,0,0,0.8); 
             margin-bottom: 25px;
             font-weight: 400;
             letter-spacing: -3px;
@@ -145,40 +150,35 @@
             font-weight: 300;
         }
 
-        .hero-line { 
-            width: 300px; 
+        .hero-separator { 
+            width: 250px; 
             height: 1px; 
             background: linear-gradient(90deg, transparent, var(--silver), transparent); 
-            margin: 60px auto; 
+            margin: 0 auto; 
         }
 
-        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR SÓLIDO CON LÍNEAS) --- */
-        .unified-content-section {
+        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR #525F48 + ARTE) --- */
+        .unified-magic-block {
             position: relative;
             padding: 180px 20px;
             background-color: var(--base-green);
             color: var(--white);
             text-align: center;
-            z-index: 15;
+            z-index: 20;
             border-top: 10px solid var(--silver);
             overflow: hidden;
         }
 
-        /* Líneas orgánicas en Ivory y Plateado para el fondo sólido */
-        .unified-content-section svg {
+        /* SVG para líneas orgánicas llamativas en el bloque verde */
+        .svg-lines-container {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            opacity: 0.35;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2;
         }
 
-        .invitation-inner { 
-            position: relative; 
-            z-index: 10; 
-        }
+        .invitation-body { position: relative; z-index: 30; }
 
-        .invitation-inner h2 { 
+        .invitation-body h2 { 
             font-size: clamp(3rem, 10vw, 5rem); 
             margin-bottom: 50px; 
             font-weight: 400;
@@ -191,21 +191,21 @@
             font-size: 1.7rem; 
             font-weight: 300;
             line-height: 2.3;
-            opacity: 0.98;
+            opacity: 0.95;
         }
         
-        .date-display-box {
+        .date-display-premium {
             display: inline-flex;
             gap: 60px;
-            font-size: clamp(3.8rem, 12vw, 6rem);
+            font-size: clamp(3.5rem, 12vw, 6rem);
             font-family: 'Playfair Display', serif;
             padding: 45px 100px;
             margin-bottom: 80px;
             border-top: 3px solid var(--silver);
             border-bottom: 3px solid var(--silver);
             color: var(--silver-light);
-            background: rgba(0,0,0,0.15);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
         }
 
         .reception-tag {
@@ -217,32 +217,32 @@
             text-transform: uppercase;
         }
 
-        /* TARJETAS DE UBICACIÓN MÁGICAS */
-        .locations-grid {
-            margin-top: 160px;
+        /* UBICACIONES INMERSIVAS */
+        .locations-container {
+            margin-top: 150px;
             position: relative;
-            z-index: 10;
+            z-index: 30;
         }
 
-        .card-location {
+        .card-location-magic {
             max-width: 950px;
             margin: 0 auto 120px;
             padding: 100px 60px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(10, 10, 10, 0.25);
+            background: rgba(10, 10, 10, 0.3);
             backdrop-filter: blur(25px);
             text-align: center;
             transition: var(--transition-premium);
-            box-shadow: 0 0 50px rgba(0,0,0,0.3);
+            box-shadow: 0 0 50px rgba(0,0,0,0.4);
         }
 
-        .card-location:hover {
+        .card-location-magic:hover {
             transform: translateY(-15px);
             border-color: var(--white);
-            box-shadow: 0 0 70px rgba(255,255,255,0.1);
+            box-shadow: 0 0 80px rgba(255,255,255,0.1);
         }
 
-        .card-location h3 { 
+        .card-location-magic h3 { 
             font-size: 3.2rem; 
             margin-bottom: 35px; 
             color: var(--silver-light); 
@@ -250,15 +250,15 @@
             letter-spacing: 2px;
         }
 
-        .card-location p { 
+        .card-location-magic p { 
             font-size: 1.9rem; 
             font-weight: 300; 
             margin-bottom: 60px; 
             color: var(--ivory); 
         }
 
-        /* DISEÑO DE BOTÓN PLATEADO */
-        .btn-premium {
+        /* BOTÓN DE GALA */
+        .btn-magic {
             display: inline-block;
             padding: 28px 90px;
             border: 2px solid var(--white);
@@ -272,31 +272,31 @@
             background: transparent;
         }
 
-        .btn-premium:hover { 
+        .btn-magic:hover { 
             background: var(--white); 
             color: var(--base-green); 
             box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        /* --- SECCIÓN 4: RECOMENDACIONES (INFORMACIÓN ÍNTEGRA) --- */
-        .recommendations-layout {
+        /* --- SECCIÓN 4: RECOMENDACIONES (INFORMACIÓN COMPLETA) --- */
+        .recommendations-section {
             background-color: var(--white);
             color: var(--dark-bg);
             padding: 180px 20px;
             text-align: center;
             position: relative;
-            z-index: 15;
+            z-index: 30;
             border-top: 12px solid var(--silver);
         }
 
-        .recommendations-layout h3 { 
+        .recommendations-section h3 { 
             font-size: clamp(3.5rem, 9vw, 4.5rem); 
             color: var(--base-green); 
             margin-bottom: 130px; 
             font-style: italic;
         }
 
-        .grid-recommendations {
+        .grid-recs-layout {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
@@ -305,7 +305,7 @@
             text-align: left;
         }
 
-        .rec-box { 
+        .rec-item-box { 
             padding: 60px; 
             border-left: 10px solid var(--base-green); 
             background-color: #f9f9f9;
@@ -313,7 +313,7 @@
             line-height: 2.1;
         }
 
-        .rec-box strong {
+        .rec-item-box strong {
             display: block;
             font-size: 1.4rem;
             margin-bottom: 20px;
@@ -322,8 +322,8 @@
             text-transform: uppercase;
         }
 
-        /* --- CONTROL DE MÚSICA (music.mp3) --- */
-        #music-control {
+        /* --- CONTROL DE MÚSICA REPARADO (music.mp3) --- */
+        #music-trigger {
             position: fixed; 
             bottom: 50px; 
             right: 50px; 
@@ -332,7 +332,7 @@
             background: rgba(10, 10, 10, 0.85); 
             border: 4px solid var(--silver); 
             border-radius: 50%;
-            z-index: 10000; /* Sobre los destellos */
+            z-index: 11000; /* Siempre encima de los destellos */
             display: flex; 
             align-items: center; 
             justify-content: center;
@@ -344,7 +344,7 @@
             box-shadow: 0 20px 45px rgba(0,0,0,0.6);
         }
 
-        #music-control:hover { transform: scale(1.15) rotate(15deg); border-color: var(--white); }
+        #music-trigger:hover { transform: scale(1.15) rotate(15deg); border-color: var(--white); }
 
         /* --- PIE DE PÁGINA (back.jpeg) --- */
         footer { 
@@ -366,110 +366,118 @@
             z-index: 1;
         }
 
-        .footer-content {
+        .footer-wrap {
             position: relative;
             z-index: 2;
         }
 
         /* --- RESPONSIVE ENGINE --- */
         @media (max-width: 768px) {
-            .date-display-box { font-size: 2.8rem; gap: 30px; padding: 40px 45px; }
-            .card-location { padding: 70px 30px; }
-            .grid-recommendations { grid-template-columns: 1fr; }
-            .hero-container h1 { font-size: 4.2rem; }
-            .btn-premium { padding: 22px 50px; font-size: 1rem; }
-            .recommendations-layout { padding: 120px 20px; }
+            .date-display-premium { font-size: 2.8rem; gap: 30px; padding: 40px 45px; }
+            .card-location-magic { padding: 70px 30px; }
+            .grid-recs-layout { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 4.2rem; }
+            .btn-magic { padding: 22px 50px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div id="magic-sparkles-layer"></div>
+    <div id="magic-sparkles-canvas"></div>
 
-    <audio id="audioFondo" loop preload="auto">
+    <audio id="gradAudio" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
-    <div id="music-control" onclick="gestionarMusica()">🔇</div>
+    <div id="music-trigger" onclick="gestionarMusica()"> static/MusicOff </div>
 
-    <header class="hero-layout">
+    <header class="hero-section">
         <div class="hero-vignette"></div>
-        <div class="hero-container reveal delay-1">
+        <div class="hero-content reveal-node delay-1">
             <p class="hero-subtitle">Ingeniería Química</p>
             <h1>Graduación 2026</h1>
-            <div class="hero-line"></div>
+            <div class="hero-separator"></div>
         </div>
     </header>
 
-    <section class="unified-content-section">
-        <svg viewBox="0 0 1000 1000" preserveAspectRatio="none">
-            <path d="M0,200 Q250,100 500,200 T1000,200" fill="none" stroke="var(--ivory)" stroke-width="0.5" opacity="0.2"/>
-            <path d="M0,500 Q300,700 600,500 T1000,600" fill="none" stroke="var(--silver)" stroke-width="0.5" opacity="0.3"/>
-            <path d="M0,800 Q200,900 500,800 T1000,900" fill="none" stroke="var(--ivory)" stroke-width="0.5" opacity="0.2"/>
-            <path d="M-100,400 Q400,200 900,400" fill="none" stroke="var(--silver)" stroke-width="1" opacity="0.1"/>
+    <section class="unified-magic-block">
+        
+        <svg class="svg-lines-container" preserveAspectRatio="none" viewBox="0 0 1000 1000">
+            <defs>
+                <linearGradient id="mystic-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:var(--silver);stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:var(--ivory);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:var(--silver-light);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            
+            <path class="fluid-line-path" d="M-100,200 C200,50 400,450 600,200 S900,-50 1100,100" />
+            <path class="fluid-line-path" style="animation-delay: -3s; opacity: 0.4;" d="M-50,600 Q250,900 500,600 T1050,650" />
+            <path class="fluid-line-path" style="animation-delay: -6s;" d="M0,900 C300,750 700,1050 1000,800" />
+            <path class="fluid-line-path" style="stroke-width: 2; opacity: 0.2;" d="M300,-100 Q600,500 900,1100" />
         </svg>
 
-        <div class="invitation-inner">
-            <div class="reveal">
+        <div class="invitation-body">
+            <div class="reveal-node">
                 <h2>Generación 2021-2026</h2>
                 <p class="invitation-text">
-                    La Facultad de Ingeniería tiene el honor de invitarlos a la cena de graduación, un momento solemne para celebrar el éxito compartido, la amistad forjada en los laboratorios y el inicio de una vida profesional llena de triunfos. Los esperamos el día:
+                    La Facultad de Ingeniería tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Un momento para honrar el esfuerzo y la amistad forjada en los laboratorios. Los esperamos el día:
                 </p>
-                <div class="date-display-box">
+                <div class="date-display-premium">
                     <span>25</span> <span>04</span> <span>26</span>
                 </div>
                 <p class="reception-tag">RECEPCIÓN: 18:00 HRS</p>
             </div>
 
-            <div class="locations-grid">
-                <div class="card-location reveal">
+            <div class="locations-container">
+                <div class="card-location-magic reveal-node">
                     <h3>Hacienda El Coecillo</h3>
-                    <p>Recinto de la Celebración</p>
-                    <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-premium">VER UBICACIÓN</a>
+                    <p>Sede de la Celebración</p>
+                    <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-magic">VER UBICACIÓN</a>
                 </div>
 
-                <div class="card-location reveal">
+                <div class="card-location-magic reveal-node">
                     <h3>Iglesia El Ranchito</h3>
                     <p>Misa de Acción de Gracias<br>13:00 HRS</p>
-                    <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-premium">VER UBICACIÓN</a>
+                    <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-magic">VER UBICACIÓN</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="recommendations-layout">
-        <div class="reveal">
+    <section class="recommendations-section">
+        <div class="reveal-node">
             <h3>Recomendaciones</h3>
-            <div class="grid-recommendations">
-                <div class="rec-box">
-                    <strong>CLIMA Y PREVENCIÓN</strong>
-                    Dada la naturaleza del recinto y la fecha, se sugiere tomar las precauciones necesarias e ir abrigados, ya que el lugar puede presentar bajas temperaturas durante la noche.
+            <div class="grid-recs-layout">
+                <div class="rec-item-box">
+                    <strong>CLIMA Y PRECAUCIÓN</strong>
+                    Dada la naturaleza del recinto, se sugiere tomar las precauciones necesarias e ir abrigados, ya que el lugar puede presentar bajas temperaturas durante la noche.
                 </div>
-                <div class="rec-box">
+                <div class="rec-item-box">
                     <strong>ACCESO AL RECINTO</strong>
-                    Le recordamos que el recinto cuenta con un solo acceso habilitado para la entrada de todos los invitados, por lo que le sugerimos considerar sus tiempos de llegada.
+                    Le recordamos que el recinto cuenta con un solo acceso habilitado para la entrada de todos los invitados, le sugerimos considerar sus tiempos de llegada.
                 </div>
-                <div class="rec-box">
+                <div class="rec-item-box">
                     <strong>VALET PARKING</strong>
                     Se contará con servicio de estacionamiento externo a cargo de la empresa HC. Este servicio tiene un costo adicional por vehículo para su comodidad y seguridad.
                 </div>
-                <div class="rec-box">
+                <div class="rec-item-box">
                     <strong>ÁREAS DE FUMAR</strong>
-                    Por disposición oficial y para comodidad de todos los asistentes, el consumo de tabaco está restringido exclusivamente a las áreas exteriores debidamente designadas.
+                    Por disposición oficial y para comodidad de todos, el consumo de tabaco está restringido exclusivamente a las áreas exteriores debidamente designadas.
                 </div>
-                <div class="rec-box">
+                <div class="rec-item-box">
                     <strong>MENÚS ESPECIALES</strong>
-                    En caso de requerir un menú especial para personas veganas, vegetarianas o por condiciones de alergias, favor de solicitarlo directamente con su comité organizador.
+                    En caso de requerir un menú especial para personas veganas, vegetarianas o por condiciones de alergias, favor de solicitarlo directamente con su comité.
                 </div>
-                <div class="rec-box">
+                <div class="rec-item-box">
                     <strong>CÓDIGO DE VESTIMENTA</strong>
-                    Para esta gran gala de graduación, se requiere rigurosa Etiqueta Formal. Agradecemos de antemano su puntualidad y presencia en este evento tan especial.
+                    Para esta gran gala de graduación, se requiere Etiqueta Formal. Agradecemos su puntualidad y presencia en este evento tan especial para nuestra generación.
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
+        <div class="footer-wrap">
             <p class="serif" style="font-size: 2.8rem; margin-bottom: 20px;">Ingeniería Química</p>
             <p style="letter-spacing: 8px; font-weight: 300;">GENERACIÓN 2021-2026</p>
         </div>
@@ -477,56 +485,57 @@
 
     <script>
         // GENERADOR DE DESTELLOS MÁGICOS (AL FRENTE)
-        function initMagicSparkles() {
-            const container = document.getElementById('magic-sparkles-layer');
-            const sparkleCount = 80;
+        function initSparkleSystem() {
+            const container = document.getElementById('magic-sparkles-canvas');
+            const total = 85;
 
-            for (let i = 0; i < sparkleCount; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle-dot';
+            for (let i = 0; i < total; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'sparkle-particle';
                 
                 const size = Math.random() * 6 + 2;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
-                const duration = Math.random() * 4 + 3;
+                const speed = Math.random() * 4 + 3.5;
                 const delay = Math.random() * 5;
 
-                sparkle.style.width = `${size}px`;
-                sparkle.style.height = `${size}px`;
-                sparkle.style.left = `${posX}%`;
-                sparkle.style.top = `${posY}%`;
-                sparkle.style.setProperty('--speed', `${duration}s`);
-                sparkle.style.animationDelay = `${delay}s`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.setProperty('--speed', `${speed}s`);
+                particle.style.animationDelay = `${delay}s`;
 
-                container.appendChild(sparkle);
+                container.appendChild(particle);
             }
         }
 
-        // CONTROL DE MÚSICA
-        const audio = document.getElementById('audioFondo');
-        const btnIcon = document.getElementById('music-control');
+        // CONTROL DE AUDIO
+        const audio = document.getElementById('gradAudio');
+        const btn = document.getElementById('music-trigger');
 
         function gestionarMusica() {
             if (audio.paused) {
                 audio.play().then(() => {
-                    btnIcon.innerHTML = "🔊";
-                }).catch(e => console.log("Interacción requerida"));
+                    btn.innerHTML = "🔊";
+                }).catch(e => console.log("Interacción necesaria"));
             } else {
                 audio.pause();
-                btnIcon.innerHTML = "🔇";
+                btn.innerHTML = "🔇";
             }
         }
 
-        // Activación inteligente
+        // Activación inicial por clic
         document.body.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play();
-                btnIcon.innerHTML = "🔊";
+                audio.play().then(() => {
+                    btn.innerHTML = "🔊";
+                });
             }
         }, { once: true });
 
-        // Inicializar efectos
-        window.onload = initMagicSparkles;
+        // Inicializar efectos al cargar
+        window.onload = initSparkleSystem;
     </script>
 
 </body>
