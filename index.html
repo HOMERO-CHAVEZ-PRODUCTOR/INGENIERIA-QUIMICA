@@ -9,19 +9,19 @@
 
     <style>
         :root {
-            /* Paleta Bosque Mágico Total */
-            --base-green: #525F48;   
+            /* Paleta Bosque Mágico de Gala */
+            --forest-tint: #525F48;   /* Tinte verde místico */
             --dark-bg: #0a0a0a;      
             --ivory: #f8f9f5;      
-            --silver: #C0C0C2;          
-            --silver-light: #E5E4E2;    
-            --silver-bright: #ffffff;
+            --silver-muted: #C0C0C2;          
+            --silver-bright: #ffffff;    
+            --gold-sparkle: #f7efca; /* Micro-destellos dorados */
             --white: #ffffff;
-            --overlay-mystic: rgba(10, 10, 10, 0.7);
+            --overlay-mystic: rgba(10, 10, 10, 0.75);
             --transition-premium: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- reset --- */
+        /* --- ARQUITECTURA BASE Y RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -35,51 +35,60 @@
 
         h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- MOTOR DE ATMÓSFERA (BOSQUE MÁGICO TOTAL) --- */
+        /* --- MOTOR DE ATMÓSFERA INMERSIVA (BOSQUE MÁGICO TOTAL) --- */
         .magic-atmosphere {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 2; /* Entre fondo y contenido */
+            z-index: 2; /* Capa mística entre fondo y contenido */
             overflow: hidden;
         }
 
-        /* Capa 1: Niebla Mística en movimiento */
-        .mystic-fog {
+        /* Capa 1: Tinte Místico sobre el bosque */
+        .mystic-tint {
             position: absolute;
-            width: 300%; height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxnIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iNTAwIiBjeT0iNTAwIiByPSI1MDAiIGZpbGw9IiNmZmZmZmYiLz48L2c+PC9zdmc+'); /* SVG sutil de nubes */
+            width: 100%; height: 100%;
+            background-color: var(--forest-tint);
             opacity: 0.15;
-            animation: fogMove 60s linear infinite;
+            mix-blend-mode: color; /* Integra el color con la imagen */
         }
 
-        @keyframes fogMove {
+        /* Capa 2: Niebla Encantada en movimiento */
+        .enchanted-fog {
+            position: absolute;
+            width: 300%; height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiPjxnIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iNTAwIiBjeT0iNTAwIiByPSI1MDAiIGZpbGw9IiNmZmZmZmYiLz48L2c+PC9zdmc+'); /* SVG sutil de niebla */
+            opacity: 0.1;
+            animation: fogFloat 70s linear infinite;
+        }
+
+        @keyframes fogFloat {
             from { transform: translateX(0); }
             to { transform: translateX(-50%); }
         }
 
-        /* Capa 2: Haces de Luz Cenital (God Rays) */
-        .god-rays {
+        /* Capa 3: Rayos de Luz Cenital (Filtero entre árboles) */
+        .celestial-rays {
             position: absolute;
             top: -50%; left: 0; width: 200%; height: 200%;
             background: repeating-linear-gradient(
                 45deg,
                 transparent,
-                transparent 50px,
-                rgba(255, 255, 255, 0.03) 80px,
-                rgba(255, 255, 255, 0.03) 120px
+                transparent 60px,
+                rgba(255, 255, 255, 0.04) 90px,
+                rgba(255, 255, 255, 0.04) 140px
             );
-            filter: blur(10px);
-            animation: raysRotate 90s linear infinite;
+            filter: blur(12px);
+            animation: raysShift 100s linear infinite;
         }
 
-        @keyframes raysRotate {
+        @keyframes raysShift {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* Capa 3: Luciérnagas y Destellos (Grande y Chico) */
-        .sparkle-point {
+        /* Capa 4: Luciérnagas y Polvo de Hadas (DESTELLOS RESUCITADOS) */
+        .fairy-dust {
             position: absolute;
             background: white;
             border-radius: 50%;
@@ -88,21 +97,20 @@
             animation: breatheGlow var(--t) infinite ease-in-out;
         }
 
-        /* Animación del resplandor: grande y chico */
         @keyframes breatheGlow {
-            0%, 100% { transform: scale(0.3); opacity: 0.1; box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2); }
-            50% { transform: scale(1.4); opacity: 0.8; box-shadow: 0 0 25px 12px rgba(255, 255, 255, 0.5); }
+            0%, 100% { transform: scale(0.4); opacity: 0.1; box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.2); }
+            50% { transform: scale(1.3); opacity: 0.8; box-shadow: 0 0 25px 12px rgba(255, 255, 255, 0.4); }
         }
 
-        /* --- ANIMACIONES DE CONTENIDO --- */
-        @keyframes revealUp {
-            from { opacity: 0; transform: translateY(60px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* --- ANIMACIONES DE REVELACIÓN DE CONTENIDO --- */
+        @keyframes revealPremium {
+            from { opacity: 0; transform: translateY(70px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .reveal { opacity: 0; animation: revealUp 1.5s ease forwards; }
+        .reveal { opacity: 0; animation: revealPremium 1.8s ease forwards; }
         .delay-1 { animation-delay: 0.5s; }
 
-        /* --- SECCIÓN 1: PORTADA HERO (BOSQUE MÁGICO INICIAL) --- */
+        /* --- SECCIÓN 1: PORTADA HERO (back.jpeg) --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -114,104 +122,122 @@
             background-image: url('back.jpeg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: fixed; /* Parallax elegante */
             z-index: 10;
         }
         
         .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 10%, var(--dark-bg) 100%), var(--overlay-mystic);
+            background: radial-gradient(circle, transparent 15%, var(--dark-bg) 100%), var(--overlay-mystic);
             z-index: 1;
         }
 
         .hero-container { position: relative; z-index: 10; max-width: 1000px; }
+        
         .hero-container h1 { 
-            font-size: clamp(3rem, 12vw, 6.5rem); 
+            font-size: clamp(3.2rem, 13vw, 7rem); 
             margin-bottom: 25px; 
             font-weight: 400; 
             letter-spacing: -2px; 
-            /* Título metálico plateado */
-            background: linear-gradient(to bottom, var(--white), var(--silver-light), var(--silver));
+            /* Título metálico plateado con resplandor */
+            background: linear-gradient(to bottom, var(--white), var(--silver-muted), var(--silver-bright));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(255,255,255,0.2);
+            text-shadow: 0 0 40px rgba(255,255,255,0.25);
         }
-        .hero-subtitle { font-size: 1.5rem; letter-spacing: 12px; text-transform: uppercase; color: var(--silver-light); margin-bottom: 60px; font-weight: 300; }
-        .hero-line { width: 250px; height: 1px; background: linear-gradient(90deg, transparent, var(--silver), transparent); margin: 0 auto; }
 
-        /* --- BLOQUE UNIFICADO (INVITACIÓN Y UBICACIONES SOBRE VERDE MÁGICO) --- */
-        .unified-block {
+        .hero-subtitle { font-size: 1.5rem; letter-spacing: 14px; text-transform: uppercase; color: var(--silver-light); margin-bottom: 60px; font-weight: 300; }
+        .hero-line { width: 250px; height: 1px; background: linear-gradient(90deg, transparent, var(--silver-muted), transparent); margin: 0 auto; }
+
+        /* --- BLOQUE UNIFICADO (INVITACIÓN Y UBICACIONES SOBRE EL BOSQUE) --- */
+        .invitation-locations-flow {
             position: relative;
-            padding: 180px 20px;
-            background-color: var(--base-green); 
+            padding: 160px 20px 120px;
+            /* SE ELIMINA FONDO SÓLIDO: fluye sobre el bosque */
             color: var(--white);
             text-align: center;
             z-index: 15;
-            border-top: 8px solid var(--silver);
             overflow: hidden;
+            border-top: 1px solid rgba(192, 192, 194, 0.1);
+            background-color: var(--dark-bg); /* Fondo base sutil */
         }
 
-        /* Overlay para unificar el bloque verde con la atmósfera */
-        .unified-block::after {
+        /* Fondo del bloque con imagen y tinte integrados */
+        .invitation-locations-flow::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(10,10,10,0.4), transparent, rgba(10,10,10,0.4));
-            z-index: 1;
+            background-image: url('back.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.15; /* Muy sutil para elegancia */
+            z-index: -1;
         }
 
         .invitation-content { position: relative; z-index: 5; }
-        .invitation-header h2 { font-size: clamp(3rem, 9vw, 4.8rem); margin-bottom: 45px; font-weight: 400; letter-spacing: 3px; }
-        .invitation-txt { max-width: 850px; margin: 0 auto 70px; font-size: 1.6rem; font-weight: 300; line-height: 2.2; }
+        
+        .invitation-header h2 { 
+            font-size: clamp(3rem, 9vw, 4.8rem); 
+            margin-bottom: 45px; 
+            font-weight: 400; 
+            letter-spacing: 3px; 
+            text-shadow: 0 0 20px rgba(255,255,255,0.15);
+        }
+
+        .invitation-txt { max-width: 900px; margin: 0 auto 70px; font-size: 1.6rem; font-weight: 300; line-height: 2.2; opacity: 0.95; }
         
         .date-display {
             display: inline-flex;
             gap: 60px;
-            font-size: clamp(3rem, 11vw, 5.5rem);
+            font-size: clamp(3.2rem, 11vw, 5.5rem);
             font-family: 'Playfair Display', serif;
             padding: 40px 90px;
             margin-bottom: 70px;
-            border-top: 3px solid var(--silver);
-            border-bottom: 3px solid var(--silver);
+            border-top: 2px solid rgba(192, 192, 194, 0.5);
+            border-bottom: 2px solid rgba(192, 192, 194, 0.5);
             color: var(--silver-light);
-            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            text-shadow: 0 0 15px rgba(255,255,255,0.25);
         }
 
         .reception-label { letter-spacing: 8px; font-size: 1.3rem; margin-top: 30px; font-weight: 300; color: var(--silver-light); text-transform: uppercase; }
 
-        /* UBICACIONES EFECTO VIDRIO */
-        .locations-wrapper { margin-top: 140px; position: relative; z-index: 5; }
+        /* UBICACIONES CON EFECTO VIDRIO MÍSTICO MEJORADO */
+        .locations-container { margin-top: 160px; position: relative; z-index: 5; }
+        
         .card-location {
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto 100px;
             padding: 90px 60px;
-            border: 2px solid rgba(255, 255, 255, 0.4); /* Borde brillante */
-            background: rgba(10, 10, 10, 0.2);
-            backdrop-filter: blur(15px);
+            /* Glassmorphism elevado */
+            border: 2px solid rgba(255, 255, 255, 0.4); 
+            background: rgba(10, 10, 10, 0.25);
+            backdrop-filter: blur(25px);
             text-align: center;
             transition: var(--transition-premium);
-            box-shadow: 0 0 40px rgba(0,0,0,0.2);
+            box-shadow: 0 0 50px rgba(0,0,0,0.3);
         }
-        .card-location:hover { transform: translateY(-12px); border-color: var(--silver-bright); box-shadow: 0 0 50px rgba(255,255,255,0.15); }
-        .card-location h3 { font-size: 3rem; margin-bottom: 30px; color: var(--silver-light); font-weight: 400; letter-spacing: 2px; }
+        
+        .card-location:hover { transform: translateY(-15px); border-color: var(--silver-bright); box-shadow: 0 0 70px rgba(255,255,255,0.2); }
+        .card-location h3 { font-size: 3.2rem; margin-bottom: 30px; color: var(--silver-bright); font-weight: 400; letter-spacing: 2px; }
         .card-location p { font-size: 1.8rem; font-weight: 300; margin-bottom: 50px; color: var(--ivory); }
 
         .btn-premium {
             display: inline-block;
-            padding: 25px 80px;
+            padding: 25px 85px;
             border: 2px solid var(--white);
             color: var(--white);
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 6px;
+            letter-spacing: 7px;
             font-size: 1.1rem;
             font-weight: 700;
             transition: var(--transition-premium);
             background: transparent;
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
-        .btn-premium:hover { background: var(--white); color: var(--base-green); box-shadow: 0 15px 50px rgba(255,255,255,0.4); }
+        .btn-premium:hover { background: var(--white); color: var(--forest-tint); box-shadow: 0 20px 60px rgba(255,255,255,0.35); }
 
         /* --- SECCIÓN RECOMENDACIONES --- */
         .rec-section {
@@ -221,38 +247,38 @@
             text-align: center;
             position: relative;
             z-index: 15;
-            border-top: 10px solid var(--silver);
+            border-top: 10px solid var(--silver-muted);
         }
 
-        .rec-section h3 { font-size: 3.5rem; color: var(--base-green); margin-bottom: 120px; font-style: italic; }
+        .rec-section h3 { font-size: 3.5rem; color: var(--forest-tint); margin-bottom: 120px; font-style: italic; }
         
         .grid-recs {
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
             text-align: left;
         }
 
         .rec-box { 
-            padding: 55px; 
-            border-left: 8px solid var(--base-green); 
+            padding: 60px; 
+            border-left: 8px solid var(--forest-tint); 
             background-color: #fcfcfc;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.06);
             line-height: 2;
         }
-        .rec-box strong { display: block; font-size: 1.3rem; margin-bottom: 15px; letter-spacing: 2px; color: var(--base-green); text-transform: uppercase; }
+        .rec-box strong { display: block; font-size: 1.3rem; margin-bottom: 15px; letter-spacing: 2px; color: var(--forest-tint); text-transform: uppercase; }
 
-        /* --- MUSICA MÁGICA --- */
+        /* --- MUSICA MÁGICA CON RESPLANDOR --- */
         #music-btn {
             position: fixed; bottom: 50px; right: 50px; width: 85px; height: 85px;
-            background: rgba(10, 10, 10, 0.6); border: 2px solid var(--silver); border-radius: 50%;
+            background: rgba(10, 10, 10, 0.65); border: 2px solid var(--silver-muted); border-radius: 50%;
             z-index: 2500; display: flex; align-items: center; justify-content: center;
             cursor: pointer; color: white; font-size: 2.2rem; transition: var(--transition-premium);
-            backdrop-filter: blur(8px); box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px); box-shadow: 0 0 30px rgba(255,255,255,0.2);
         }
-        #music-btn:hover { box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+        #music-btn:hover { box-shadow: 0 0 40px rgba(255,255,255,0.4); border-color: var(--silver-bright); }
 
         /* --- FOOTER (BOSQUE MÁGICO FINAL) --- */
         footer { 
@@ -265,18 +291,20 @@
 
         @media (max-width: 768px) {
             .date-display { font-size: 2.8rem; gap: 30px; padding: 35px 45px; }
-            .hero-container h1 { font-size: 3.8rem; }
+            .hero-container h1 { font-size: 3.5rem; }
             .grid-recs { grid-template-columns: 1fr; }
             .card-location { padding: 60px 25px; }
+            .btn-premium { padding: 22px 50px; font-size: 1rem; letter-spacing: 5px; }
         }
     </style>
 </head>
 <body>
 
     <div class="magic-atmosphere">
-        <div class="mystic-fog"></div>
-        <div class="god-rays"></div>
-        <div class="sparkle-canvas" id="magic-sparkles"></div>
+        <div class="mystic-tint"></div>
+        <div class="enchanted-fog"></div>
+        <div class="celestial-rays"></div>
+        <div id="fairy-dust-canvas"></div>
     </div>
 
     <audio id="gradMusic" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
@@ -291,7 +319,7 @@
         </div>
     </header>
 
-    <section class="unified-block">
+    <section class="invitation-locations-flow">
         <div class="invitation-content">
             <div class="reveal">
                 <h2>Generación 2021-2026</h2>
@@ -304,7 +332,7 @@
                 <p class="reception-label">RECEPCIÓN: 18:00 HRS</p>
             </div>
 
-            <div class="locations-wrapper">
+            <div class="locations-container">
                 <div class="card-location reveal">
                     <h3>Recepción de Gala</h3>
                     <p>Hacienda El Coecillo</p>
@@ -343,7 +371,7 @@
                 </div>
                 <div class="rec-box">
                     <strong>Menús Especiales</strong>
-                    Favor de solicitar menús para veganos, vegetarianos o por condiciones de alergias directamente con su comité organizador.
+                    Favor de solicitar menús para veganos, vegetarianos o por condiciones de alergias directamente con su comité organizador con anticipación.
                 </div>
                 <div class="rec-box">
                     <strong>Código de Vestimenta</strong>
@@ -354,35 +382,35 @@
     </section>
 
     <footer>
-        <div style="position: relative; z-index: 2;">
-            <p class="serif" style="font-size: 2.2rem; margin-bottom: 15px;">Ingeniería Química</p>
+        <div class="footer-inner">
+            <p class="serif" style="font-size: 2.5rem; margin-bottom: 15px;">Ingeniería Química</p>
             <p style="letter-spacing: 6px; font-weight: 300;">GENERACIÓN 2021-2026</p>
         </div>
     </footer>
 
     <script>
-        // GENERADOR DE DESTELLOS MÁGICOS (MÁS LLAMATIVO)
-        function generateSparkles(targetId, count) {
+        // GENERADOR DE POLVO DE HADAS (DESTELLOS CON RESPLANDOR INDEPENDIENTE)
+        function createFairyDust(targetId, count) {
             const container = document.getElementById(targetId);
             for (let i = 0; i < count; i++) {
                 const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle-point';
+                sparkle.className = 'fairy-dust';
                 
-                // Variación de tamaño y posición
-                const size = Math.random() * 6 + 2; // Puntos más grandes
+                // Variación de tamaño para profundidad
+                const size = Math.random() * 6 + 2; 
                 const top = Math.random() * 100;
                 const left = Math.random() * 100;
-                const speed = Math.random() * 4 + 3; // Parpadeo más lento y místico
-                const delay = Math.random() * 5;
+                const speed = Math.random() * 4 + 3; // Respiración mística
+                const delay = Math.random() * 7;
 
                 sparkle.style.width = `${size}px`;
                 sparkle.style.height = `${size}px`;
                 sparkle.style.top = `${top}%`;
                 sparkle.style.left = `${left}%`;
                 
-                // Color aleatorio sutil (blanco o verde místico pálido)
-                if (Math.random() > 0.7) {
-                    sparkle.style.background = 'rgba(160, 180, 150, 0.8)'; // Verde místico
+                // Variación de color aleatoria muy sutil (blanco o dorado pálido místico)
+                if (Math.random() > 0.8) {
+                    sparkle.style.background = 'rgba(247, 239, 202, 0.9)'; // Dorado místico
                 }
 
                 sparkle.style.setProperty('--t', `${speed}s`);
@@ -392,8 +420,8 @@
             }
         }
 
-        // Generar 80 destellos para un efecto muy llamativo
-        generateSparkles('magic-sparkles', 80);
+        // Generar 100 micro-destellos por todo el diseño
+        createFairyDust('fairy-dust-canvas', 100);
 
         // CONTROL DE AUDIO
         const audio = document.getElementById('gradMusic');
