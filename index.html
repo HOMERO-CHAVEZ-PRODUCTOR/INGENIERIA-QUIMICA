@@ -9,6 +9,7 @@
 
     <style>
         :root {
+            /* Paleta Bosque Místico y Oro de Gala */
             --forest-deep: #06402b;   
             --dark-bg: #050505;      
             --ivory: #f8f9f5;      
@@ -20,6 +21,7 @@
             --transition-premium: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* --- ARQUITECTURA BASE: CURSIVA ELEGANTE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -32,7 +34,7 @@
             position: relative;
         }
 
-        /* FONDO: Corregido a back.jpg según tus archivos */
+        /* Imagen de fondo back.jpeg inmersiva */
         body::before {
             content: '';
             position: fixed;
@@ -53,7 +55,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 50;
+            z-index: 50; 
         }
 
         .firefly-particle {
@@ -277,7 +279,7 @@
     </audio>
     
     <div id="music-btn-container" onclick="gestionarMusica()">
-        <div id="music-btn-ui">🔇</div>
+        <div id="music-btn-ui"> static/MusicOff </div>
     </div>
 
     <header class="hero-layout">
@@ -300,10 +302,7 @@
                 <h2 class="gala-title" style="font-size: 3.5rem; color: var(--gold-bright); margin-bottom: 20px;">Generación 2021-2026</h2>
                 <p class="invitation-text">
                     La Facultad de Ingeniería Química tiene el honor de invitarlos a celebrar el cierre de este gran ciclo académico.
-
-Es un momento para honrar el esfuerzo individual, la amistad forjada en las aulas y el inicio de una nueva etapa profesional.
-
-
+                    Es un momento para honrar el esfuerzo individual, la amistad forjada en las aulas y el inicio de una nueva etapa profesional.
                 </p>
                 <div class="date-display-box">
                     <span>25</span> <span>04</span> <span>26</span>
@@ -332,7 +331,7 @@ Es un momento para honrar el esfuerzo individual, la amistad forjada en las aula
             <h3 class="gala-title">Recomendaciones</h3>
             <div class="recs-grid">
                 <div class="rec-item">
-                    <strong>CLIMA Y PROTECCIÓN/strong>
+                    <strong>CLIMA Y PROTECCIÓN</strong>
                     Le sugerimos encarecidamente tomar precauciones e ir abrigados ante el clima del lugar.
                 </div>
                 <div class="rec-item">
