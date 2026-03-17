@@ -9,7 +9,6 @@
 
     <style>
         :root {
-            /* Paleta Bosque Místico y Oro de Gala */
             --forest-deep: #06402b;   
             --dark-bg: #050505;      
             --ivory: #f8f9f5;      
@@ -17,12 +16,10 @@
             --gold-bright: #f1d399;  
             --silver: #C0C0C2;          
             --white: #ffffff;
-            /* --- CAMBIO SOLICITADO: Degradado negro MUY disminuido para resaltar imagen --- */
-            --overlay-deep: rgba(5, 5, 5, 0.25); /* Antes 0.85, ahora mucho más transparente */
+            --overlay-deep: rgba(5, 5, 5, 0.25); 
             --transition-premium: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE: CURSIVA ELEGANTE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -35,7 +32,7 @@
             position: relative;
         }
 
-        /* Imagen de fondo back.jpeg inmersiva */
+        /* FONDO: Revisa que tu imagen sea back.jpeg */
         body::before {
             content: '';
             position: fixed;
@@ -43,7 +40,7 @@
             background-image: url('back.jpeg');
             background-size: cover;
             background-position: center;
-            opacity: 0.25; /* Sutil transparencia para integrar con el fondo negro base */
+            opacity: 0.25; 
             z-index: -1;
         }
 
@@ -52,12 +49,11 @@
             font-style: normal;
         }
 
-        /* --- MOTOR DE LUCIÉRNAGAS (DESTELLOS AMARILLOS TENUES) --- */
         #firefly-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 50; /* Bajo el texto principal */
+            z-index: 50;
         }
 
         .firefly-particle {
@@ -73,14 +69,12 @@
             50% { transform: scale(1.1); opacity: 0.6; box-shadow: 0 0 12px 4px rgba(255, 248, 214, 0.3); }
         }
 
-        /* --- SISTEMA DE REVELACIÓN --- */
         @keyframes revealPremium {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .reveal { opacity: 0; animation: revealPremium 2s ease forwards; }
 
-        /* --- PORTADA GALA (back.jpeg) CON IMAGEN RESALTADA --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -95,8 +89,7 @@
         .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* --- CAMBIO SOLICITADO: Viñeta radial más suave para resaltar imagen --- */
-            background: radial-gradient(circle, transparent 40%, var(--dark-bg) 110%); /* Más radio transparente */
+            background: radial-gradient(circle, transparent 40%, var(--dark-bg) 110%);
             z-index: 1;
         }
 
@@ -125,7 +118,6 @@
             margin: 0 auto; 
         }
 
-        /* --- FLUJO UNIFICADO INMERSIVO --- */
         .unified-flow-section {
             position: relative;
             padding: 150px 20px 100px;
@@ -134,7 +126,6 @@
             z-index: 150;
         }
 
-        /* Capa de líneas orgánicas sutiles */
         .organic-svg-decor {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -170,7 +161,6 @@
 
         .reception-tag { letter-spacing: 6px; font-size: 1.2rem; margin-top: 25px; color: var(--silver); }
 
-        /* UBICACIONES FLOTANTES */
         .locations-wrapper { margin-top: 120px; }
         .location-unit {
             max-width: 850px;
@@ -193,25 +183,23 @@
         }
         .btn-gold-outline:hover { background: var(--gold-muted); color: var(--dark-bg); box-shadow: 0 0 30px rgba(197, 160, 89, 0.4); }
 
-        /* --- SECCIÓN RECOMENDACIONES (GRADUACIÓN A VERDE SOLIDO) --- */
         .recommendations-area {
             position: relative;
             padding: 180px 20px 200px;
-            z-index: 200; /* Asegurar que esté sobre todo */
+            z-index: 200;
         }
 
-        /* Degradado que fusiona la imagen con el verde bosque */
         .recommendations-area::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, transparent 0%, var(--forest-deep) 100%);
-            z-index: 1; /* Fondo del área */
+            z-index: 1;
         }
 
         .recommendations-content {
             position: relative;
-            z-index: 10; /* TEXTO ENCIMA DE TODO SOLICITADO */
+            z-index: 10; 
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
@@ -235,7 +223,6 @@
         }
         .rec-item strong { display: block; font-size: 1.3rem; margin-bottom: 12px; color: var(--gold-muted); }
 
-        /* --- BOTÓN MÚSICA REPARADO (Z-INDEX 3000) --- */
         #music-btn-container {
             position: fixed; 
             bottom: 40px; 
@@ -262,7 +249,6 @@
             font-style: normal;
         }
 
-        /* --- FOOTER --- */
         footer { 
             position: relative; 
             text-align: center; 
@@ -274,7 +260,6 @@
 
         .footer-logo { font-size: 2.8rem; color: var(--gold-bright); margin-bottom: 10px; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .date-display-box { gap: 30px; padding: 25px 40px; font-size: 2.2rem; }
             .hero-container h1 { font-size: 3.5rem; }
@@ -325,14 +310,14 @@
             <div class="locations-wrapper">
                 <div class="location-unit reveal">
                     <h3>Hacienda El Coecillo</h3>
-                    <p>Recepció</p>
-                    <a href="https://maps.app.goo.gl/uXmHn3j6E6uLCH1v6" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
+                    <p>Recepción</p>
+                    <a href="https://maps.app.goo.gl/wJ13YmZ89a2L7pA19" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
                 </div>
 
                 <div class="location-unit reveal">
                     <h3>Iglesia El Ranchito</h3>
                     <p>Misa | 13:00 hrs</p>
-                    <a href="https://maps.app.goo.gl/3A5DizqP7T8PAnmY9" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
+                    <a href="https://maps.app.goo.gl/3q2uB8p78wR9yX6" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
                 </div>
             </div>
         </div>
@@ -400,7 +385,7 @@
             if (audio.paused) {
                 audio.play().then(() => {
                     btnUi.innerHTML = "🔊";
-                }).catch(e => console.log("Interacción requerida"));
+                }).catch(e => console.log("Click requerido"));
             } else {
                 audio.pause();
                 btnUi.innerHTML = "🔇";
