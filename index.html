@@ -5,116 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Graduación Ingeniería Química | Generación 2021-2026</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Great+Vibes&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Paleta Bosque Profundo de Ingeniería Química */
-            --base-green: #3a5f42;   /* Verde Bosque Más Profundo */
-            --dark-bg: #0a0a0a;      
+            /* Paleta Bosque Profundo Plateada */
+            --forest-green: #06402b;   
+            --dark-bg: #050505;      
             --ivory: #f8f9f5;      
             --silver: #C0C0C2;          
-            --silver-light: #E5E4E2;    
-            --silver-dark: #848482;     
+            --silver-bright: #E5E4E2;    
             --white: #ffffff;
-            --overlay-mystic: rgba(0, 0, 0, 0.75);
-            --transition-premium: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            --overlay-mystic: rgba(0, 0, 0, 0.7);
+            --transition-premium: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE Y RESET --- */
+        /* --- ARQUITECTURA BASE: TODO EN CURSIVA --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             background-color: var(--dark-bg); 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
             color: var(--white); 
             line-height: 1.9; 
             overflow-x: hidden;
             position: relative;
         }
 
-        h1, h2, h3, h4, .serif { font-family: 'Playfair Display', serif; }
-
-        /* --- MOTOR DE DESTELLOS MÁGICOS (BOSQUE) --- */
-        #magic-sparkles-hero {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5; /* Sobre la imagen pero bajo el texto */
-            overflow: hidden;
+        h1, h2, h3, h4, p, span, a, strong, div { 
+            font-family: 'Playfair Display', serif; 
+            font-style: italic;
         }
 
-        #magic-sparkles-footer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+        /* --- MOTOR DE LUCIÉRNAGAS (SUTILES) --- */
+        #firefly-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 1; /* Bajo el texto */
-            overflow: hidden;
+            z-index: 100;
         }
 
-        .glow-point {
+        .firefly {
             position: absolute;
-            background: white;
+            background: var(--ivory);
             border-radius: 50%;
             opacity: 0;
             filter: blur(1px);
-            animation: breatheSparkle var(--speed) infinite ease-in-out;
+            animation: drift var(--speed) infinite ease-in-out;
         }
 
-        /* Animación del resplandor: grande y chico */
-        @keyframes breatheSparkle {
-            0%, 100% { 
-                transform: scale(0.3); 
-                opacity: 0.1; 
-                box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.1); 
-            }
-            50% { 
-                transform: scale(1.4); 
-                opacity: 0.8; 
-                box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.4); 
-            }
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(0.3); opacity: 0; }
+            50% { transform: translate(40px, -40px) scale(1); opacity: 0.5; box-shadow: 0 0 10px white; }
         }
 
-        /* --- ARTE ORGÁNICO: LÍNEAS FLUIDAS (PROTAGONISTAS) --- */
-        .organic-art-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .fluid-line-path {
-            fill: none;
-            stroke: url(#mystic-gradient);
-            stroke-width: 4.5; /* Grosor llamativo y protagonista */
-            stroke-linecap: round;
-            filter: drop-shadow(0 0 15px rgba(248, 249, 245, 0.4));
-            stroke-dasharray: 2000;
-            stroke-dashoffset: 2000;
-            animation: drawFluidLine 15s ease-in-out infinite alternate;
-        }
-
-        @keyframes drawFluidLine {
-            to { stroke-dashoffset: 0; }
-        }
-
-        /* --- SISTEMA DE REVELACIÓN (ANIMACIONES) --- */
-        @keyframes fadeInUpReveal {
-            from { opacity: 0; transform: translateY(80px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .reveal-node { opacity: 0; animation: fadeInUpReveal 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        .delay-1 { animation-delay: 0.5s; }
-        .delay-2 { animation-delay: 1s; }
-
-        /* --- SECCIÓN 1: PORTADA HERO (back.jpeg) --- */
-        .hero-section {
+        /* --- SECCIÓN 1: PORTADA HERO (back.jpg) --- */
+        .hero-layout {
             position: relative;
             min-height: 100vh;
             display: flex; 
@@ -122,10 +69,11 @@
             justify-content: center; 
             text-align: center;
             padding: 50px;
-            background-image: url('back.jpeg');
+            background-image: url('back.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            z-index: 10;
         }
         
         .hero-vignette {
@@ -135,424 +83,360 @@
             z-index: 1;
         }
 
-        .hero-content { 
+        .hero-container { 
             position: relative; 
             z-index: 10; 
-            max-width: 1100px;
+            max-width: 1000px;
         }
 
-        .hero-content h1 { 
-            font-size: clamp(3.5rem, 14vw, 7.5rem); 
-            text-shadow: 0 0 40px rgba(0,0,0,0.8); 
-            margin-bottom: 25px;
-            font-weight: 400;
-            letter-spacing: -3px;
+        .hero-container h1 { 
+            font-family: 'Great Vibes', cursive;
+            font-style: normal;
+            font-size: clamp(4rem, 15vw, 8rem); 
+            color: var(--silver-bright);
+            margin-bottom: 10px;
+            /* DESTELLO REDUCIDO: text-shadow más sutil solicitado */
+            text-shadow: 0 0 15px rgba(255,255,255,0.2); 
         }
 
         .hero-subtitle { 
-            font-size: 1.6rem; 
-            letter-spacing: 14px; 
-            text-transform: uppercase; 
-            margin-bottom: 70px;
-            color: var(--silver-light);
+            font-size: clamp(1.2rem, 4vw, 2rem); 
+            color: var(--silver);
+            letter-spacing: 5px;
             font-weight: 300;
         }
 
-        .hero-separator { 
-            width: 250px; 
-            height: 1px; 
-            background: linear-gradient(90deg, transparent, var(--silver), transparent); 
-            margin: 0 auto; 
-        }
-
-        /* --- BLOQUE UNIFICADO: INVITACIÓN Y UBICACIONES (COLOR #44523A + ARTE) --- */
-        .unified-magic-block {
+        /* --- SECCIÓN UNIFICADA (FECHA, UBICACIONES Y RECOMENDACIONES) --- */
+        .unified-magic-section {
             position: relative;
-            padding: 180px 20px;
-            background-color: var(--base-green); /* Verde más profundo solicitado */
+            background: linear-gradient(to bottom, 
+                var(--dark-bg) 0%, 
+                var(--forest-green) 15%, 
+                #032116 50%, 
+                var(--forest-green) 85%, 
+                var(--dark-bg) 100%);
             color: var(--white);
-            text-align: center;
             z-index: 20;
-            border-top: 10px solid var(--silver);
-            overflow: hidden;
+            overflow: visible;
         }
 
-        /* ELIMINADA LA CAPA DE DESTELLOS EN ESTA SECCIÓN */
+        /* Transición de Niebla Superior para back.jpg */
+        .unified-magic-section::before {
+            content: '';
+            position: absolute;
+            top: -25vh; left: 0; width: 100%; height: 25.1vh;
+            background: linear-gradient(to top, var(--forest-green), transparent);
+            z-index: 5;
+        }
 
-        /* SVG para líneas orgánicas llamativas en el bloque verde */
-        .svg-lines-container {
+        /* --- LÍNEAS ORGÁNICAS PLATEADAS TENUES --- */
+        .organic-svg-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
             z-index: 2;
+            opacity: 0.15;
         }
 
-        .invitation-body { position: relative; z-index: 30; }
-
-        .invitation-body h2 { 
-            font-size: clamp(3rem, 10vw, 5rem); 
-            margin-bottom: 50px; 
-            font-weight: 400;
-            letter-spacing: 4px;
+        .silver-line {
+            fill: none;
+            stroke: var(--silver-bright);
+            stroke-width: 1;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 20s linear infinite alternate;
         }
 
-        .invitation-text { 
-            max-width: 900px; 
-            margin: 0 auto 80px; 
-            font-size: 1.7rem; 
-            font-weight: 300;
-            line-height: 2.3;
-            opacity: 0.95;
-        }
-        
-        .date-display-premium {
-            display: inline-flex;
-            gap: 60px;
-            font-size: clamp(3.5rem, 12vw, 6rem);
-            font-family: 'Playfair Display', serif;
-            padding: 45px 100px;
-            margin-bottom: 80px;
-            border-top: 3px solid var(--silver);
-            border-bottom: 3px solid var(--silver);
-            color: var(--silver-light);
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
-        }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
 
-        .reception-tag {
-            letter-spacing: 10px;
-            font-size: 1.4rem;
-            margin-top: 35px;
-            font-weight: 300;
-            color: var(--silver);
-            text-transform: uppercase;
-        }
-
-        /* UBICACIONES INMERSIVAS */
-        .locations-container {
-            margin-top: 150px;
+        /* --- CONTENIDO FLUÍDO CENTRADO --- */
+        .section-content {
             position: relative;
             z-index: 30;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center; /* Alineación central de base */
+            padding: 100px 20px;
         }
 
-        .card-location-magic {
-            max-width: 950px;
-            margin: 0 auto 120px;
-            padding: 100px 60px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(10, 10, 10, 0.3);
-            backdrop-filter: blur(25px);
+        .main-invitation-title {
+            font-family: 'Great Vibes', cursive;
+            font-style: normal;
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--silver-bright);
+            margin-bottom: 30px;
+        }
+
+        .invitation-text {
+            font-size: 1.5rem;
+            line-height: 2.2;
+            margin-bottom: 60px;
+            font-weight: 300;
+            opacity: 0.9;
             text-align: center;
-            transition: var(--transition-premium);
-            box-shadow: 0 0 50px rgba(0,0,0,0.4);
         }
 
-        .card-location-magic:hover {
-            transform: translateY(-15px);
-            border-color: var(--white);
-            box-shadow: 0 0 80px rgba(255,255,255,0.1);
-        }
-
-        .card-location-magic h3 { 
-            font-size: 3.2rem; 
-            margin-bottom: 35px; 
-            color: var(--silver-light); 
-            font-weight: 400; 
-            letter-spacing: 2px;
-        }
-
-        .card-location-magic p { 
-            font-size: 1.9rem; 
-            font-weight: 300; 
-            margin-bottom: 60px; 
-            color: var(--ivory); 
-        }
-
-        /* BOTÓN DE GALA */
-        .btn-magic {
+        .date-silver-box {
             display: inline-block;
-            padding: 28px 90px;
-            border: 2px solid var(--white);
+            padding: 40px 80px;
+            border-top: 1px solid var(--silver);
+            border-bottom: 1px solid var(--silver);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .date-text {
+            font-size: clamp(3rem, 12vw, 5.5rem);
+            letter-spacing: 15px;
             color: var(--white);
+        }
+
+        /* --- UBICACIONES FLOTANTES Y CENTRADAS --- */
+        .locations-container {
+            padding: 120px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrado horizontal de items flex */
+        }
+
+        .location-floating-unit {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 120px;
+            text-align: center; /* Centrado de texto */
+            text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .location-floating-unit h3 {
+            font-size: 3rem;
+            color: var(--silver-bright);
+            margin-bottom: 20px;
+        }
+
+        .location-floating-unit p {
+            font-size: 1.6rem;
+            margin-bottom: 45px;
+            color: var(--ivory);
+            text-align: center;
+        }
+
+        .btn-silver {
+            display: inline-block;
+            padding: 20px 60px;
+            border: 1px solid var(--silver-bright);
+            color: var(--silver-bright);
             text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 7px;
             font-size: 1.2rem;
-            font-weight: 700;
+            border-radius: 50px;
             transition: var(--transition-premium);
             background: transparent;
         }
 
-        .btn-magic:hover { 
-            background: var(--white); 
-            color: var(--base-green); 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        .btn-silver:hover {
+            background: var(--white);
+            color: var(--forest-green);
+            box-shadow: 0 0 30px rgba(255,255,255,0.4);
         }
 
-        /* --- SECCIÓN 4: RECOMENDACIONES (INFORMACIÓN COMPLETA) --- */
-        .recommendations-section {
-            background-color: var(--white);
-            color: var(--dark-bg);
-            padding: 180px 20px;
-            text-align: center;
-            position: relative;
-            z-index: 30;
-            border-top: 12px solid var(--silver);
+        /* --- SECCIÓN RECOMENDACIONES (DENTRO DEL MISMO FONDO Y CENTRADO) --- */
+        .recommendations-container {
+            padding: 100px 20px 200px;
+            text-align: center; /* Centrado general */
         }
 
-        .recommendations-section h3 { 
-            font-size: clamp(3.5rem, 9vw, 4.5rem); 
-            color: var(--base-green); 
-            margin-bottom: 130px; 
-            font-style: italic;
+        .recommendations-container h3 {
+            font-size: 3.5rem;
+            color: var(--silver-bright);
+            margin-bottom: 80px;
+            text-align: center; /* Centrado del título solicitado */
         }
 
-        .grid-recs-layout {
-            max-width: 1400px;
-            margin: 0 auto;
+        .recs-grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 60px;
-            text-align: left;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            text-align: left; /* Texto de tarjetas a la izquierda */
         }
 
-        .rec-item-box { 
-            padding: 60px; 
-            border-left: 10px solid var(--base-green); 
-            background-color: #f9f9f9;
-            box-shadow: 25px 25px 70px rgba(0,0,0,0.06);
-            line-height: 2.1;
+        .rec-floating-card {
+            padding: 40px;
+            border-left: 2px solid var(--silver);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(5px);
+            transition: 0.4s;
         }
 
-        .rec-item-box strong {
+        .rec-floating-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-5px);
+        }
+
+        .rec-floating-card strong {
             display: block;
             font-size: 1.4rem;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-            color: var(--base-green);
-            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--silver-bright);
         }
 
-        /* --- CONTROL DE MÚSICA REPARADO --- */
-        #music-btn-container {
-            position: fixed; bottom: 50px; right: 50px; width: 90px; height: 90px;
-            border-radius: 50%; z-index: 9000; overflow: hidden;
-            border: 4px solid var(--silver); 
-            transition: var(--transition-premium);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-        }
-        
-        #music-btn-container:hover { transform: scale(1.1) rotate(10deg); border-color: var(--white); }
-
-        #music-control-ui {
-            width: 100%; height: 100%;
-            background: rgba(10, 10, 10, 0.85); 
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; color: white; font-size: 2.5rem; 
-            backdrop-filter: blur(10px);
+        /* --- BOTÓN MÚSICA REPARADO --- */
+        #music-btn {
+            position: fixed; bottom: 40px; right: 40px; width: 70px; height: 70px;
+            border-radius: 50%; z-index: 10000; border: 1px solid var(--silver);
+            background: rgba(0,0,0,0.8); color: var(--silver-bright); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
+            backdrop-filter: blur(10px); transition: 0.4s;
+            font-style: normal;
         }
 
-        /* --- PIE DE PÁGINA (back.jpeg) --- */
-        footer { 
-            position: relative;
-            text-align: center; 
-            padding: 160px 20px; 
-            background-image: url('back.jpeg');
+        #music-btn:hover { transform: scale(1.1); border-color: white; }
+
+        /* --- FOOTER --- */
+        footer {
+            height: 50vh;
+            background-image: url('back.jpg');
             background-size: cover;
-            background-position: center;
-            color: var(--white); 
-            border-top: 1px solid rgba(192, 192, 194, 0.1);
+            background-position: center bottom;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        footer::before {
-            content: '';
+        .footer-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); 
-            z-index: 1;
+            background: linear-gradient(to top, transparent 0%, var(--dark-bg) 100%);
         }
 
-        .footer-wrap {
+        .footer-text-node {
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
-        /* --- RESPONSIVE ENGINE --- */
         @media (max-width: 768px) {
-            .date-display-premium { font-size: 2.8rem; gap: 30px; padding: 40px 45px; }
-            .card-location-magic { padding: 70px 30px; }
-            .grid-recs-layout { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 4.2rem; }
-            .btn-magic { padding: 22px 50px; font-size: 1rem; }
-            .recommendations-section { padding: 120px 20px; }
-            #music-btn-container { width: 70px; height: 70px; bottom: 30px; right: 30px; border-width: 3px; }
-            #music-control-ui { font-size: 2rem; }
+            .date-text { letter-spacing: 8px; }
+            .hero-container h1 { font-size: 4rem; }
+            .recs-grid-layout { grid-template-columns: 1fr; }
+            .section-content { padding: 60px 20px; }
+            .recommendations-container h3 { margin-bottom: 60px; }
         }
     </style>
 </head>
 <body>
 
-    <script>
-        function genSparkles(targetId, count) {
-            const container = document.getElementById(targetId);
-            if(!container) return;
-            for (let i = 0; i < count; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'glow-point';
-                const size = Math.random() * 5 + 2;
-                const top = Math.random() * 100;
-                const left = Math.random() * 100;
-                const speed = Math.random() * 4 + 3;
-                const delay = Math.random() * 5;
+    <div id="firefly-canvas"></div>
 
-                sparkle.style.width = size + 'px';
-                sparkle.style.height = size + 'px';
-                sparkle.style.top = top + '%';
-                sparkle.style.left = left + '%';
-                sparkle.style.setProperty('--speed', speed + 's');
-                sparkle.style.animationDelay = delay + 's';
-                container.appendChild(sparkle);
-            }
-        }
-    </script>
+    <audio id="gradMusic" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
+    <button id="music-btn" onclick="toggleMusic()">🔇</button>
 
-    <audio id="gradAudio" loop preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-    <div id="music-btn-container">
-        <div id="music-control-ui" onclick="gestionarMusica()">🔇</div>
-    </div>
-
-    <header class="hero-section">
-        <div id="magic-sparkles-hero"></div>
+    <header class="hero-layout">
         <div class="hero-vignette"></div>
-        <div class="hero-content reveal-node delay-1">
-            <p class="hero-subtitle">Ingeniería Química</p>
+        <div class="hero-container">
             <h1>Graduación 2026</h1>
-            <div class="hero-separator"></div>
+            <p class="hero-subtitle">Ingeniería Química</p>
         </div>
     </header>
 
-    <section class="unified-magic-block">
+    <div class="unified-magic-section">
         
-        <svg class="svg-lines-container" preserveAspectRatio="none" viewBox="0 0 1000 1000">
-            <defs>
-                <linearGradient id="mystic-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:var(--silver);stop-opacity:1" />
-                    <stop offset="50%" style="stop-color:var(--ivory);stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:var(--silver-light);stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            
-            <path class="fluid-line-path" d="M-100,200 C200,50 400,450 600,200 S900,-50 1100,100" />
-            <path class="fluid-line-path" style="animation-delay: -3s; opacity: 0.4;" d="M-50,600 Q250,900 500,600 T1050,650" />
-            <path class="fluid-line-path" style="animation-delay: -6s;" d="M0,900 C300,750 700,1050 1000,800" />
-            <path class="fluid-line-path" style="stroke-width: 2.5; opacity: 0.2;" d="M300,-100 Q600,500 900,1100" />
+        <svg class="organic-svg-container" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            <path class="silver-line" d="M0,200 Q300,50 500,300 T1000,100" />
+            <path class="silver-line" d="M-100,600 Q400,900 700,500 T1200,800" style="animation-delay: -5s;" />
         </svg>
 
-        <div class="invitation-body">
-            <div class="reveal-node">
-                <h2>Generación 2021-2026</h2>
-                <p class="invitation-text">
-                    La Facultad de Ingeniería tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Un momento para honrar el esfuerzo y la amistad forjada en los laboratorios. Los esperamos el día:
-                </p>
-                <div class="date-display-premium">
-                    <span>25</span> <span>04</span> <span>26</span>
-                </div>
-                <p class="reception-tag">RECEPCIÓN: 18:00 HRS</p>
+        <section class="section-content">
+            <h2 class="main-invitation-title">Generación 2021-2026</h2>
+            <p class="invitation-text">
+                La Facultad de Ingeniería tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Un momento para honrar el esfuerzo y la amistad forjada en los laboratorios. Los esperamos el día:
+            </p>
+            <div class="date-silver-box">
+                <div class="date-text">25 | 04 | 26</div>
+                <p style="letter-spacing: 6px; margin-top: 25px; font-size: 1.4rem;">Recepción: 18:00 hrs</p>
+            </div>
+        </section>
+
+        <section class="locations-container">
+            <div class="location-floating-unit">
+                <h3>Hacienda El Coecillo</h3>
+                <p>Recepción</p>
+                <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-silver">Ver Ubicación</a>
             </div>
 
-            <div class="locations-container">
-                <div class="card-location-magic reveal-node">
-                    <h3>Hacienda El Coecillo</h3>
-                    <p>Sede de la Celebración</p>
-                    <a href="https://maps.app.goo.gl/qZ7Dk184EXonveKC7" target="_blank" class="btn-magic">VER UBICACIÓN</a>
-                </div>
+            <div class="location-floating-unit">
+                <h3>Iglesia El Ranchito</h3>
+                <p>Misa<br>13:00 hrs</p>
+                <a href="usercontent.com/maps.google.com/1" target="_blank" class="btn-silver">Ver Ubicación</a>
+            </div>
+        </section>
 
-                <div class="card-location-magic reveal-node">
-                    <h3>Iglesia El Ranchito</h3>
-                    <p>Misa de Acción de Gracias<br>13:00 HRS</p>
-                    <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-magic">VER UBICACIÓN</a>
+        <section class="recommendations-container">
+            <h3>Sugerencias de Gala</h3>
+            <div class="recs-grid-layout">
+                <div class="rec-floating-card">
+                    <strong>Clima</strong>
+                    Le sugerimos encarecidamente tomar precauciones e ir abrigados ante el clima del lugar.
+                </div>
+                <div class="rec-floating-card">
+                    <strong>Acceso</strong>
+                    Contamos con un solo acceso habilitado para la seguridad de nuestros invitados.
+                </div>
+                <div class="rec-floating-card">
+                    <strong>Estacionamiento</strong>
+                    Servicio externo a HC, con costo adicional por auto
+                </div>
+                <div class="rec-floating-card">
+                    <strong>Espacios</strong>
+                    El consumo de tabaco está permitido únicamente en las áreas exteriores designadas.
+                </div>
+                <div class="rec-floating-card">
+                    <strong>Menú</strong>
+                    Favor de solicitar menús especiales (vegano/alergias) directamente con su comité organizador con anticipación.
+                </div>
+                <div class="rec-floating-card">
+                    <strong>Dress Code</strong>
+                    Para esta gran noche se requiere Etiqueta Formal. 
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="recommendations-section">
-        <div class="reveal-node">
-            <h3>Recomendaciones</h3>
-            <div class="grid-recs-layout">
-                <div class="rec-item-box">
-                    <strong>CLIMA Y PRECAUCIÓN</strong>
-                    Dada la naturaleza del recinto, se sugiere tomar las precauciones necesarias e ir abrigados, ya que el lugar puede presentar bajas temperaturas durante la noche.
-                </div>
-                <div class="rec-item-box">
-                    <strong>ACCESO AL RECINTO</strong>
-                    Le recordamos que el recinto cuenta con un solo acceso habilitado para la entrada de todos los invitados, le sugerimos considerar sus tiempos de llegada.
-                </div>
-                <div class="rec-item-box">
-                    <strong>VALET PARKING</strong>
-                    Se contará con servicio de estacionamiento externo a cargo de la empresa HC. Este servicio tiene un costo adicional por vehículo para su comodidad y seguridad.
-                </div>
-                <div class="rec-item-box">
-                    <strong>ÁREAS DE FUMAR</strong>
-                    Por disposición oficial y para comodidad de todos, el consumo de tabaco está restringido exclusivamente a las áreas exteriores debidamente designadas.
-                </div>
-                <div class="rec-item-box">
-                    <strong>MENÚS ESPECIALES</strong>
-                    En caso de requerir un menú especial para personas veganas, vegetarianas o por condiciones de alergias, favor de solicitarlo directamente con su comité.
-                </div>
-                <div class="rec-item-box">
-                    <strong>CÓDIGO DE VESTIMENTA</strong>
-                    Para esta gran gala de graduación, se requiere Etiqueta Formal. Agradecemos su puntualidad y presencia en este evento tan especial para nuestra generación.
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <footer>
-        <div id="magic-sparkles-footer"></div>
-        <div class="footer-wrap">
-            <p class="serif" style="font-size: 2.8rem; margin-bottom: 20px;">Ingeniería Química</p>
-            <p style="letter-spacing: 8px; font-weight: 300;">GENERACIÓN 2021-2026</p>
+        <div class="footer-overlay"></div>
+        <div class="footer-text-node">
+            <h2 style="font-size: 3.5rem; color: var(--silver-bright); font-family: 'Great Vibes', cursive; font-style: normal;">Ingeniería Química</h2>
+            <p style="letter-spacing: 5px; opacity: 0.8; font-size: 1.2rem;">Generación 2021-2026</p>
         </div>
     </footer>
 
     <script>
-        // Inicializar destellos en portada y pie
-        window.onload = function() {
-            genSparkles('magic-sparkles-hero', 80);
-            genSparkles('magic-sparkles-footer', 60);
-        };
-
-        // CONTROL DE AUDIO CORREGIDO
-        const audio = document.getElementById('gradAudio');
-        const btnUi = document.getElementById('music-control-ui');
-
-        function gestionarMusica() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    btnUi.innerHTML = "🔊";
-                }).catch(e => {
-                    console.log("Interacción requerida");
-                    btnUi.innerHTML = "❌"; // Feedback de error
-                });
-            } else {
-                audio.pause();
-                btnUi.innerHTML = "🔇";
-            }
+        // MOTOR DE LUCIÉRNAGAS
+        const canvas = document.getElementById('firefly-canvas');
+        for (let i = 0; i < 45; i++) {
+            const firefly = document.createElement('div');
+            firefly.className = 'firefly';
+            firefly.style.width = Math.random() * 3 + 2 + 'px';
+            firefly.style.height = firefly.style.width;
+            firefly.style.left = Math.random() * 100 + '%';
+            firefly.style.top = Math.random() * 100 + '%';
+            firefly.style.setProperty('--speed', (Math.random() * 5 + 5) + 's');
+            firefly.style.animationDelay = Math.random() * 5 + 's';
+            canvas.appendChild(firefly);
         }
 
-        // Activación inteligente por clic
-        document.body.addEventListener('click', () => {
+        // MÚSICA
+        const audio = document.getElementById('gradMusic');
+        const btn = document.getElementById('music-btn');
+        function toggleMusic() {
             if (audio.paused) {
-                audio.play().then(() => {
-                    btnUi.innerHTML = "🔊";
-                }).catch(e => {
-                    // Si falla el auto-play, mantenemos el estado mudo
-                });
+                audio.play(); btn.innerHTML = "🔊";
+            } else {
+                audio.pause(); btn.innerHTML = "🔇";
             }
+        }
+        document.body.addEventListener('click', () => {
+            if (audio.paused) { audio.play(); btn.innerHTML = "🔊"; }
         }, { once: true });
     </script>
-
 </body>
 </html>
