@@ -3,64 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graduación Ingeniería Química | Generación 2021-2026</title>
+    <title>Noche de Gala | Ingeniería Química 2021-2026</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@1,400;1,700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* Paleta Bosque Profundo Plateada */
-            --forest-green: #06402b;   
+            /* Paleta Bosque Místico y Oro de Gala */
+            --forest-deep: #06402b;   
             --dark-bg: #050505;      
             --ivory: #f8f9f5;      
+            --gold-muted: #c5a059;   
+            --gold-bright: #f1d399;  
             --silver: #C0C0C2;          
-            --silver-bright: #E5E4E2;    
             --white: #ffffff;
-            --overlay-mystic: rgba(0, 0, 0, 0.7);
+            --overlay-deep: rgba(5, 5, 5, 0.85);
             --transition-premium: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE: TODO EN CURSIVA --- */
+        /* --- ARQUITECTURA BASE: CURSIVA ELEGANTE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
             background-color: var(--dark-bg); 
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            color: var(--white); 
-            line-height: 1.9; 
+            color: var(--ivory); 
+            line-height: 1.8; 
             overflow-x: hidden;
             position: relative;
         }
 
-        h1, h2, h3, h4, p, span, a, strong, div { 
-            font-family: 'Playfair Display', serif; 
-            font-style: italic;
+        /* Imagen de fondo back.jpeg inmersiva */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('back.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.18;
+            z-index: -1;
         }
 
-        /* --- MOTOR DE LUCIÉRNAGAS (SUTILES) --- */
+        h1, h2, h3, .gala-title {
+            font-family: 'Great Vibes', cursive;
+            font-style: normal;
+        }
+
+        /* --- MOTOR DE LUCIÉRNAGAS (DESTELLOS AMARILLOS TENUES) --- */
         #firefly-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 100;
+            z-index: 50; /* Bajo el texto principal */
         }
 
-        .firefly {
+        .firefly-particle {
             position: absolute;
-            background: var(--ivory);
+            background: radial-gradient(circle, #fff8d6 20%, transparent 70%);
             border-radius: 50%;
             opacity: 0;
-            filter: blur(1px);
-            animation: drift var(--speed) infinite ease-in-out;
+            animation: fireflyBreathe var(--speed) infinite ease-in-out;
         }
 
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0) scale(0.3); opacity: 0; }
-            50% { transform: translate(40px, -40px) scale(1); opacity: 0.5; box-shadow: 0 0 10px white; }
+        @keyframes fireflyBreathe {
+            0%, 100% { transform: scale(0.3); opacity: 0.05; }
+            50% { transform: scale(1.1); opacity: 0.6; box-shadow: 0 0 12px 4px rgba(255, 248, 214, 0.3); }
         }
 
-        /* --- SECCIÓN 1: PORTADA HERO (back.jpg) --- */
+        /* --- SISTEMA DE REVELACIÓN --- */
+        @keyframes revealPremium {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; animation: revealPremium 2s ease forwards; }
+
+        /* --- PORTADA GALA (back.jpeg) --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -69,257 +88,196 @@
             justify-content: center; 
             text-align: center;
             padding: 50px;
-            background-image: url('back.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            z-index: 10;
+            z-index: 100;
         }
-        
+
         .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, var(--dark-bg) 100%), var(--overlay-mystic);
+            background: radial-gradient(circle, transparent 30%, var(--dark-bg) 100%);
             z-index: 1;
         }
 
-        .hero-container { 
-            position: relative; 
-            z-index: 10; 
-            max-width: 1000px;
-        }
-
+        .hero-container { position: relative; z-index: 10; max-width: 900px; }
+        
         .hero-container h1 { 
-            font-family: 'Great Vibes', cursive;
-            font-style: normal;
-            font-size: clamp(4rem, 15vw, 8rem); 
-            color: var(--silver-bright);
-            margin-bottom: 10px;
-            /* DESTELLO REDUCIDO: text-shadow más sutil solicitado */
-            text-shadow: 0 0 15px rgba(255,255,255,0.2); 
+            font-size: clamp(3rem, 12vw, 5.5rem); 
+            margin-bottom: 20px; 
+            color: var(--gold-bright);
+            text-shadow: 0 0 25px rgba(197, 160, 89, 0.3);
         }
 
         .hero-subtitle { 
-            font-size: clamp(1.2rem, 4vw, 2rem); 
-            color: var(--silver);
-            letter-spacing: 5px;
+            font-size: 1.2rem; 
+            letter-spacing: 10px; 
+            text-transform: uppercase; 
+            color: var(--silver); 
+            margin-bottom: 50px; 
             font-weight: 300;
         }
 
-        /* --- SECCIÓN UNIFICADA (FECHA, UBICACIONES Y RECOMENDACIONES) --- */
-        .unified-magic-section {
+        .hero-line { 
+            width: 200px; 
+            height: 1px; 
+            background: linear-gradient(90deg, transparent, var(--gold-muted), transparent); 
+            margin: 0 auto; 
+        }
+
+        /* --- FLUJO UNIFICADO INMERSIVO --- */
+        .unified-flow-section {
             position: relative;
-            background: linear-gradient(to bottom, 
-                var(--dark-bg) 0%, 
-                var(--forest-green) 15%, 
-                #032116 50%, 
-                var(--forest-green) 85%, 
-                var(--dark-bg) 100%);
+            padding: 150px 20px 100px;
             color: var(--white);
-            z-index: 20;
-            overflow: visible;
+            text-align: center;
+            z-index: 150;
         }
 
-        /* Transición de Niebla Superior para back.jpg */
-        .unified-magic-section::before {
-            content: '';
-            position: absolute;
-            top: -25vh; left: 0; width: 100%; height: 25.1vh;
-            background: linear-gradient(to top, var(--forest-green), transparent);
-            z-index: 5;
-        }
-
-        /* --- LÍNEAS ORGÁNICAS PLATEADAS TENUES --- */
-        .organic-svg-container {
+        /* Capa de líneas orgánicas sutiles */
+        .organic-svg-decor {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.15;
+            z-index: -1;
+            opacity: 0.2;
         }
 
-        .silver-line {
+        .fluid-line {
             fill: none;
-            stroke: var(--silver-bright);
-            stroke-width: 1;
+            stroke: var(--silver);
+            stroke-width: 1.5;
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
-            animation: drawLine 20s linear infinite alternate;
+            animation: drawLine 18s linear infinite alternate;
         }
 
         @keyframes drawLine { to { stroke-dashoffset: 0; } }
 
-        /* --- CONTENIDO FLUÍDO CENTRADO --- */
-        .section-content {
-            position: relative;
-            z-index: 30;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center; /* Alineación central de base */
-            padding: 100px 20px;
-        }
-
-        .main-invitation-title {
-            font-family: 'Great Vibes', cursive;
-            font-style: normal;
-            font-size: clamp(3rem, 10vw, 5rem);
-            color: var(--silver-bright);
-            margin-bottom: 30px;
-        }
-
-        .invitation-text {
-            font-size: 1.5rem;
-            line-height: 2.2;
+        .invitation-inner { position: relative; z-index: 10; }
+        .invitation-header h2 { font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 40px; color: var(--gold-bright); }
+        .invitation-text { max-width: 800px; margin: 0 auto 60px; font-size: 1.4rem; font-weight: 300; line-height: 2.1; opacity: 0.9; }
+        
+        .date-display-box {
+            display: inline-flex;
+            gap: 45px;
+            font-size: clamp(2.5rem, 9vw, 4.5rem);
+            padding: 35px 70px;
             margin-bottom: 60px;
-            font-weight: 300;
-            opacity: 0.9;
-            text-align: center;
-        }
-
-        .date-silver-box {
-            display: inline-block;
-            padding: 40px 80px;
-            border-top: 1px solid var(--silver);
-            border-bottom: 1px solid var(--silver);
-            margin-bottom: 50px;
-            text-align: center;
-        }
-
-        .date-text {
-            font-size: clamp(3rem, 12vw, 5.5rem);
-            letter-spacing: 15px;
-            color: var(--white);
-        }
-
-        /* --- UBICACIONES FLOTANTES Y CENTRADAS --- */
-        .locations-container {
-            padding: 120px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centrado horizontal de items flex */
-        }
-
-        .location-floating-unit {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto 120px;
-            text-align: center; /* Centrado de texto */
-            text-shadow: 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        .location-floating-unit h3 {
-            font-size: 3rem;
-            color: var(--silver-bright);
-            margin-bottom: 20px;
-        }
-
-        .location-floating-unit p {
-            font-size: 1.6rem;
-            margin-bottom: 45px;
+            border-top: 1px solid var(--gold-muted);
+            border-bottom: 1px solid var(--gold-muted);
             color: var(--ivory);
-            text-align: center;
         }
 
-        .btn-silver {
+        .reception-tag { letter-spacing: 6px; font-size: 1.2rem; margin-top: 25px; color: var(--silver); }
+
+        /* UBICACIONES FLOTANTES */
+        .locations-wrapper { margin-top: 120px; }
+        .location-unit {
+            max-width: 850px;
+            margin: 0 auto 110px;
+            text-align: center;
+        }
+        .location-unit h3 { font-size: 2.6rem; margin-bottom: 25px; color: var(--gold-muted); }
+        .location-unit p { font-size: 1.5rem; margin-bottom: 45px; color: var(--ivory); }
+
+        .btn-gold-outline {
             display: inline-block;
-            padding: 20px 60px;
-            border: 1px solid var(--silver-bright);
-            color: var(--silver-bright);
+            padding: 18px 60px;
+            border: 1px solid var(--gold-muted);
+            color: var(--gold-muted);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border-radius: 50px;
             transition: var(--transition-premium);
             background: transparent;
         }
+        .btn-gold-outline:hover { background: var(--gold-muted); color: var(--dark-bg); box-shadow: 0 0 30px rgba(197, 160, 89, 0.4); }
 
-        .btn-silver:hover {
-            background: var(--white);
-            color: var(--forest-green);
-            box-shadow: 0 0 30px rgba(255,255,255,0.4);
-        }
-
-        /* --- SECCIÓN RECOMENDACIONES (DENTRO DEL MISMO FONDO Y CENTRADO) --- */
-        .recommendations-container {
-            padding: 100px 20px 200px;
-            text-align: center; /* Centrado general */
-        }
-
-        .recommendations-container h3 {
-            font-size: 3.5rem;
-            color: var(--silver-bright);
-            margin-bottom: 80px;
-            text-align: center; /* Centrado del título solicitado */
-        }
-
-        .recs-grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            text-align: left; /* Texto de tarjetas a la izquierda */
-        }
-
-        .rec-floating-card {
-            padding: 40px;
-            border-left: 2px solid var(--silver);
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(5px);
-            transition: 0.4s;
-        }
-
-        .rec-floating-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transform: translateY(-5px);
-        }
-
-        .rec-floating-card strong {
-            display: block;
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: var(--silver-bright);
-        }
-
-        /* --- BOTÓN MÚSICA REPARADO --- */
-        #music-btn {
-            position: fixed; bottom: 40px; right: 40px; width: 70px; height: 70px;
-            border-radius: 50%; z-index: 10000; border: 1px solid var(--silver);
-            background: rgba(0,0,0,0.8); color: var(--silver-bright); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
-            backdrop-filter: blur(10px); transition: 0.4s;
-            font-style: normal;
-        }
-
-        #music-btn:hover { transform: scale(1.1); border-color: white; }
-
-        /* --- FOOTER --- */
-        footer {
-            height: 50vh;
-            background-image: url('back.jpg');
-            background-size: cover;
-            background-position: center bottom;
+        /* --- SECCIÓN RECOMENDACIONES (GRADUACIÓN A VERDE SOLIDO) --- */
+        .recommendations-area {
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 180px 20px 200px;
+            z-index: 200; /* Asegurar que esté sobre todo */
+        }
+
+        /* Degradado que fusiona la imagen con el verde bosque */
+        .recommendations-area::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, var(--forest-deep) 100%);
+            z-index: 1; /* Fondo del área */
+        }
+
+        .recommendations-content {
+            position: relative;
+            z-index: 10; /* TEXTO ENCIMA DE TODO SOLICITADO */
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .footer-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, transparent 0%, var(--dark-bg) 100%);
+        .recommendations-content h3 { font-size: 3.2rem; color: var(--gold-bright); margin-bottom: 100px; }
+        
+        .recs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            text-align: left;
         }
 
-        .footer-text-node {
-            position: relative;
-            z-index: 10;
+        .rec-item { 
+            padding: 45px; 
+            border-left: 3px solid var(--gold-muted); 
+            background-color: rgba(5, 5, 5, 0.4);
+            backdrop-filter: blur(10px);
+            box-shadow: 15px 15px 40px rgba(0,0,0,0.1);
+        }
+        .rec-item strong { display: block; font-size: 1.3rem; margin-bottom: 12px; color: var(--gold-muted); }
+
+        /* --- BOTÓN MÚSICA REPARADO (Z-INDEX 3000) --- */
+        #music-btn-container {
+            position: fixed; 
+            bottom: 40px; 
+            right: 40px; 
+            width: 75px; 
+            height: 75px;
+            border-radius: 50%; 
+            z-index: 3000; 
+            overflow: hidden;
+            border: 2px solid var(--gold-muted); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        #music-btn-container:hover { transform: scale(1.1); border-color: var(--gold-bright); }
+
+        #music-btn-ui {
+            width: 100%; height: 100%;
+            background: rgba(10, 10, 10, 0.9); 
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold-muted); font-size: 1.8rem; 
+            backdrop-filter: blur(5px);
+            font-style: normal;
         }
 
+        /* --- FOOTER --- */
+        footer { 
+            position: relative; 
+            text-align: center; 
+            padding: 120px 20px; 
+            background-color: var(--forest-deep);
+            color: var(--white); 
+            z-index: 200;
+        }
+
+        .footer-logo { font-size: 2.8rem; color: var(--gold-bright); margin-bottom: 10px; }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .date-text { letter-spacing: 8px; }
-            .hero-container h1 { font-size: 4rem; }
-            .recs-grid-layout { grid-template-columns: 1fr; }
-            .section-content { padding: 60px 20px; }
-            .recommendations-container h3 { margin-bottom: 60px; }
+            .date-display-box { gap: 30px; padding: 25px 40px; font-size: 2.2rem; }
+            .hero-container h1 { font-size: 3.5rem; }
+            .recs-grid { grid-template-columns: 1fr; }
+            .recommendations-area { padding: 120px 20px; }
         }
     </style>
 </head>
@@ -327,116 +285,138 @@
 
     <div id="firefly-canvas"></div>
 
-    <audio id="gradMusic" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
-    <button id="music-btn" onclick="toggleMusic()">🔇</button>
+    <audio id="gradAudio" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div id="music-btn-container" onclick="gestionarMusica()">
+        <div id="music-btn-ui">🔇</div>
+    </div>
 
     <header class="hero-layout">
         <div class="hero-vignette"></div>
-        <div class="hero-container">
-            <h1>Graduación 2026</h1>
+        <div class="hero-container reveal">
             <p class="hero-subtitle">Ingeniería Química</p>
+            <h1>Graduación 2026</h1>
+            <div class="hero-line"></div>
         </div>
     </header>
 
-    <div class="unified-magic-section">
-        
-        <svg class="organic-svg-container" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-            <path class="silver-line" d="M0,200 Q300,50 500,300 T1000,100" />
-            <path class="silver-line" d="M-100,600 Q400,900 700,500 T1200,800" style="animation-delay: -5s;" />
+    <main class="unified-flow-section">
+        <svg class="organic-svg-decor" preserveAspectRatio="none" viewBox="0 0 1000 1000">
+            <path class="fluid-line" d="M-100,200 C200,50 400,450 600,200 S900,-50 1100,100" />
+            <path class="fluid-line" style="animation-delay: -5s; opacity: 0.1;" d="M-50,600 Q250,900 500,600 T1050,650" />
         </svg>
 
-        <section class="section-content">
-            <h2 class="main-invitation-title">Generación 2021-2026</h2>
-            <p class="invitation-text">
-                La Facultad de Ingeniería tiene el honor de invitarlos a celebrar el término de esta gran etapa académica y el inicio de una vida profesional llena de éxitos. Un momento para honrar el esfuerzo y la amistad forjada en los laboratorios. Los esperamos el día:
-            </p>
-            <div class="date-silver-box">
-                <div class="date-text">25 | 04 | 26</div>
-                <p style="letter-spacing: 6px; margin-top: 25px; font-size: 1.4rem;">Recepción: 18:00 hrs</p>
-            </div>
-        </section>
-
-        <section class="locations-container">
-            <div class="location-floating-unit">
-                <h3>Hacienda El Coecillo</h3>
-                <p>Recepción</p>
-                <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-silver">Ver Ubicación</a>
+        <div class="invitation-inner">
+            <div class="reveal">
+                <h2 class="gala-title" style="font-size: 3.5rem; color: var(--gold-bright); margin-bottom: 20px;">Generación 2021-2026</h2>
+                <p class="invitation-text">
+                    "Bajo el resplandor de una noche eterna, celebramos el éxito de un camino forjado en la ciencia y la amistad. Te invitamos a ser parte de este último brindis generacional."
+                </p>
+                <div class="date-display-box">
+                    <span>25</span> <span>04</span> <span>26</span>
+                </div>
+                <p class="reception-tag">RECEPCIÓN: 18:00 HRS</p>
             </div>
 
-            <div class="location-floating-unit">
-                <h3>Iglesia El Ranchito</h3>
-                <p>Misa<br>13:00 hrs</p>
-                <a href="usercontent.com/maps.google.com/1" target="_blank" class="btn-silver">Ver Ubicación</a>
-            </div>
-        </section>
+            <div class="locations-wrapper">
+                <div class="location-unit reveal">
+                    <h3>Hacienda El Coecillo</h3>
+                    <p>Sede de la Recepción de Gala</p>
+                    <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
+                </div>
 
-        <section class="recommendations-container">
-            <h3>Sugerencias de Gala</h3>
-            <div class="recs-grid-layout">
-                <div class="rec-floating-card">
-                    <strong>Clima</strong>
-                    Le sugerimos encarecidamente tomar precauciones e ir abrigados ante el clima del lugar.
-                </div>
-                <div class="rec-floating-card">
-                    <strong>Acceso</strong>
-                    Contamos con un solo acceso habilitado para la seguridad de nuestros invitados.
-                </div>
-                <div class="rec-floating-card">
-                    <strong>Estacionamiento</strong>
-                    Servicio externo a HC, con costo adicional por auto
-                </div>
-                <div class="rec-floating-card">
-                    <strong>Espacios</strong>
-                    El consumo de tabaco está permitido únicamente en las áreas exteriores designadas.
-                </div>
-                <div class="rec-floating-card">
-                    <strong>Menú</strong>
-                    Favor de solicitar menús especiales (vegano/alergias) directamente con su comité organizador con anticipación.
-                </div>
-                <div class="rec-floating-card">
-                    <strong>Dress Code</strong>
-                    Para esta gran noche se requiere Etiqueta Formal. 
+                <div class="location-unit reveal">
+                    <h3>Iglesia El Ranchito</h3>
+                    <p>Misa de Acción de Gracias | 13:00 hrs</p>
+                    <a href="usercontent.com/maps.google.com/1" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </main>
+
+    <section class="recommendations-area">
+        <div class="recommendations-content reveal">
+            <h3 class="gala-title">Sugerencias de Gala</h3>
+            <div class="recs-grid">
+                <div class="rec-item">
+                    <strong>Clima y Abrigo</strong>
+                    El recinto se encuentra en zona de bosque. Se sugiere llevar abrigo elegante, ya que las temperaturas pueden descender por la noche.
+                </div>
+                <div class="rec-item">
+                    <strong>Acceso al Evento</strong>
+                    Para su seguridad, el recinto cuenta con un solo acceso habilitado. Recomendamos considerar sus tiempos de llegada.
+                </div>
+                <div class="rec-item">
+                    <strong>Valet Parking</strong>
+                    Se contará con servicio de estacionamiento externo a cargo de la empresa HC. Tendrá un costo adicional por unidad.
+                </div>
+                <div class="rec-item">
+                    <strong>Espacios Libres de Humo</strong>
+                    El consumo de tabaco está restringido únicamente a las áreas exteriores debidamente designadas por el recinto.
+                </div>
+                <div class="rec-item">
+                    <strong>Menús Especiales</strong>
+                    En caso de requerir un menú vegano o por condiciones de alergias, favor de notificarlo a su comité organizador.
+                </div>
+                <div class="rec-item">
+                    <strong>Código de Vestimenta</strong>
+                    Esta es una celebración solemne de gala. Se requiere Etiqueta Formal. Tu presencia es el mejor adorno de nuestra noche.
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <div class="footer-overlay"></div>
-        <div class="footer-text-node">
-            <h2 style="font-size: 3.5rem; color: var(--silver-bright); font-family: 'Great Vibes', cursive; font-style: normal;">Ingeniería Química</h2>
-            <p style="letter-spacing: 5px; opacity: 0.8; font-size: 1.2rem;">Generación 2021-2026</p>
-        </div>
+        <div class="footer-logo">Ingeniería Química</div>
+        <p style="letter-spacing: 5px; opacity: 0.7; font-size: 1.1rem;">ITTOL - Generación 2021-2026</p>
     </footer>
 
     <script>
-        // MOTOR DE LUCIÉRNAGAS
-        const canvas = document.getElementById('firefly-canvas');
-        for (let i = 0; i < 45; i++) {
-            const firefly = document.createElement('div');
-            firefly.className = 'firefly';
-            firefly.style.width = Math.random() * 3 + 2 + 'px';
-            firefly.style.height = firefly.style.width;
-            firefly.style.left = Math.random() * 100 + '%';
-            firefly.style.top = Math.random() * 100 + '%';
-            firefly.style.setProperty('--speed', (Math.random() * 5 + 5) + 's');
-            firefly.style.animationDelay = Math.random() * 5 + 's';
-            canvas.appendChild(firefly);
-        }
-
-        // MÚSICA
-        const audio = document.getElementById('gradMusic');
-        const btn = document.getElementById('music-btn');
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play(); btn.innerHTML = "🔊";
-            } else {
-                audio.pause(); btn.innerHTML = "🔇";
+        // MOTOR DE LUCIÉRNAGAS (SUTILES AMARILLAS)
+        function initFireflies() {
+            const canvas = document.getElementById('firefly-canvas');
+            const total = 55;
+            for (let i = 0; i < total; i++) {
+                const fly = document.createElement('div');
+                fly.className = 'firefly-particle';
+                const size = Math.random() * 4 + 2;
+                fly.style.width = size + 'px';
+                fly.style.height = size + 'px';
+                fly.style.left = Math.random() * 100 + '%';
+                fly.style.top = Math.random() * 100 + '%';
+                fly.style.setProperty('--speed', (Math.random() * 4 + 4) + 's');
+                fly.style.animationDelay = Math.random() * 6 + 's';
+                canvas.appendChild(fly);
             }
         }
+
+        // CONTROL DE AUDIO REPARADO
+        const audio = document.getElementById('gradAudio');
+        const btnUi = document.getElementById('music-btn-ui');
+
+        function gestionarMusica() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btnUi.innerHTML = "🔊";
+                }).catch(e => console.log("Interacción requerida"));
+            } else {
+                audio.pause();
+                btnUi.innerHTML = "🔇";
+            }
+        }
+
+        // Activación inteligente por clic en cualquier parte al inicio
         document.body.addEventListener('click', () => {
-            if (audio.paused) { audio.play(); btn.innerHTML = "🔊"; }
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btnUi.innerHTML = "🔊";
+                });
+            }
         }, { once: true });
+
+        window.onload = initFireflies;
     </script>
 </body>
 </html>
