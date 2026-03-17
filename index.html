@@ -17,7 +17,8 @@
             --gold-bright: #f1d399;  
             --silver: #C0C0C2;          
             --white: #ffffff;
-            --overlay-deep: rgba(5, 5, 5, 0.85);
+            /* --- CAMBIO SOLICITADO: Degradado negro MUY disminuido para resaltar imagen --- */
+            --overlay-deep: rgba(5, 5, 5, 0.25); /* Antes 0.85, ahora mucho más transparente */
             --transition-premium: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -42,7 +43,7 @@
             background-image: url('back.jpeg');
             background-size: cover;
             background-position: center;
-            opacity: 0.18;
+            opacity: 0.25; /* Sutil transparencia para integrar con el fondo negro base */
             z-index: -1;
         }
 
@@ -79,7 +80,7 @@
         }
         .reveal { opacity: 0; animation: revealPremium 2s ease forwards; }
 
-        /* --- PORTADA GALA (back.jpeg) --- */
+        /* --- PORTADA GALA (back.jpeg) CON IMAGEN RESALTADA --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -94,7 +95,8 @@
         .hero-vignette {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 30%, var(--dark-bg) 100%);
+            /* --- CAMBIO SOLICITADO: Viñeta radial más suave para resaltar imagen --- */
+            background: radial-gradient(circle, transparent 40%, var(--dark-bg) 110%); /* Más radio transparente */
             z-index: 1;
         }
 
@@ -324,13 +326,13 @@
                 <div class="location-unit reveal">
                     <h3>Hacienda El Coecillo</h3>
                     <p>Sede de la Recepción de Gala</p>
-                    <a href="https://maps.google.com/?q=El+Ranchito+Toluca" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
+                    <a href="http://googleusercontent.com/maps/1" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
                 </div>
 
                 <div class="location-unit reveal">
                     <h3>Iglesia El Ranchito</h3>
                     <p>Misa de Acción de Gracias | 13:00 hrs</p>
-                    <a href="usercontent.com/maps.google.com/1" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
+                    <a href="http://googleusercontent.com/maps/2" target="_blank" class="btn-gold-outline">Ver Ubicación</a>
                 </div>
             </div>
         </div>
@@ -350,19 +352,19 @@
                 </div>
                 <div class="rec-item">
                     <strong>Valet Parking</strong>
-                    Se contará con servicio de estacionamiento externo a cargo de la empresa HC. Tendrá un costo adicional por unidad.
+                    Se contará con servicio de estacionamiento externo a cargo de la empresa HC. Tendrá un costo adicional por vehículo.
                 </div>
                 <div class="rec-item">
                     <strong>Espacios Libres de Humo</strong>
-                    El consumo de tabaco está restringido únicamente a las áreas exteriores debidamente designadas por el recinto.
+                    El consumo de tabaco está restringido exclusivamente a las áreas exteriores debidamente designadas por el recinto.
                 </div>
                 <div class="rec-item">
                     <strong>Menús Especiales</strong>
-                    En caso de requerir un menú vegano o por condiciones de alergias, favor de notificarlo a su comité organizador.
+                    En caso de requerir un menú vegano o por alergias, favor de notificarlo a su comité organizador.
                 </div>
                 <div class="rec-item">
                     <strong>Código de Vestimenta</strong>
-                    Esta es una celebración solemne de gala. Se requiere Etiqueta Formal. Tu presencia es el mejor adorno de nuestra noche.
+                    Esta es una celebración solemne de gala. Se requiere Etiqueta Formal. Tu presencia completará la magia de esta gran noche solemne.
                 </div>
             </div>
         </div>
