@@ -9,7 +9,6 @@
 
     <style>
         :root {
-            /* Paleta Bosque Místico y Oro de Gala */
             --forest-deep: #06402b;   
             --dark-bg: #050505;      
             --ivory: #f8f9f5;      
@@ -21,7 +20,7 @@
             --transition-premium: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* --- ARQUITECTURA BASE: CURSIVA ELEGANTE --- */
+        /* --- ARQUITECTURA BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -34,7 +33,6 @@
             position: relative;
         }
 
-        /* Imagen de fondo back.jpeg inmersiva */
         body::before {
             content: '';
             position: fixed;
@@ -51,6 +49,7 @@
             font-style: normal;
         }
 
+        /* --- MOTOR DE LUCIÉRNAGAS --- */
         #firefly-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -71,12 +70,14 @@
             50% { transform: scale(1.1); opacity: 0.6; box-shadow: 0 0 12px 4px rgba(255, 248, 214, 0.3); }
         }
 
+        /* --- ANIMACIONES --- */
         @keyframes revealPremium {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .reveal { opacity: 0; animation: revealPremium 2s ease forwards; }
 
+        /* --- PORTADA --- */
         .hero-layout {
             position: relative;
             min-height: 100vh;
@@ -96,7 +97,6 @@
         }
 
         .hero-container { position: relative; z-index: 10; max-width: 900px; }
-        
         .hero-container h1 { 
             font-size: clamp(3rem, 12vw, 5.5rem); 
             margin-bottom: 20px; 
@@ -110,16 +110,15 @@
             text-transform: uppercase; 
             color: var(--silver); 
             margin-bottom: 50px; 
-            font-weight: 300;
         }
 
         .hero-line { 
-            width: 200px; 
-            height: 1px; 
+            width: 200px; height: 1px; 
             background: linear-gradient(90deg, transparent, var(--gold-muted), transparent); 
             margin: 0 auto; 
         }
 
+        /* --- CONTENIDO --- */
         .unified-flow-section {
             position: relative;
             padding: 150px 20px 100px;
@@ -148,7 +147,7 @@
 
         .invitation-inner { position: relative; z-index: 10; }
         .invitation-header h2 { font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 40px; color: var(--gold-bright); }
-        .invitation-text { max-width: 800px; margin: 0 auto 60px; font-size: 1.4rem; font-weight: 300; line-height: 2.1; opacity: 0.9; }
+        .invitation-text { max-width: 800px; margin: 0 auto 60px; font-size: 1.4rem; font-weight: 300; line-height: 2.1; }
         
         .date-display-box {
             display: inline-flex;
@@ -158,11 +157,11 @@
             margin-bottom: 60px;
             border-top: 1px solid var(--gold-muted);
             border-bottom: 1px solid var(--gold-muted);
-            color: var(--ivory);
         }
 
         .reception-tag { letter-spacing: 6px; font-size: 1.2rem; margin-top: 25px; color: var(--silver); }
 
+        /* --- UBICACIONES --- */
         .locations-wrapper { margin-top: 120px; }
         .location-unit {
             max-width: 850px;
@@ -170,7 +169,7 @@
             text-align: center;
         }
         .location-unit h3 { font-size: 2.6rem; margin-bottom: 25px; color: var(--gold-muted); }
-        .location-unit p { font-size: 1.5rem; margin-bottom: 45px; color: var(--ivory); }
+        .location-unit p { font-size: 1.5rem; margin-bottom: 45px; }
 
         .btn-gold-outline {
             display: inline-block;
@@ -181,10 +180,10 @@
             font-size: 1.1rem;
             border-radius: 50px;
             transition: var(--transition-premium);
-            background: transparent;
         }
         .btn-gold-outline:hover { background: var(--gold-muted); color: var(--dark-bg); box-shadow: 0 0 30px rgba(197, 160, 89, 0.4); }
 
+        /* --- RECOMENDACIONES --- */
         .recommendations-area {
             position: relative;
             padding: 180px 20px 200px;
@@ -204,7 +203,6 @@
             z-index: 10; 
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .recommendations-content h3 { font-size: 3.2rem; color: var(--gold-bright); margin-bottom: 100px; }
@@ -221,10 +219,10 @@
             border-left: 3px solid var(--gold-muted); 
             background-color: rgba(5, 5, 5, 0.4);
             backdrop-filter: blur(10px);
-            box-shadow: 15px 15px 40px rgba(0,0,0,0.1);
         }
         .rec-item strong { display: block; font-size: 1.3rem; margin-bottom: 12px; color: var(--gold-muted); }
 
+        /* --- BOTÓN MÚSICA REPARADO --- */
         #music-btn-container {
             position: fixed; 
             bottom: 40px; 
@@ -233,30 +231,28 @@
             height: 75px;
             border-radius: 50%; 
             z-index: 3000; 
-            overflow: hidden;
             border: 2px solid var(--gold-muted); 
+            background: rgba(10, 10, 10, 0.9);
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
             transition: 0.3s;
         }
         
         #music-btn-container:hover { transform: scale(1.1); border-color: var(--gold-bright); }
 
-        #music-btn-ui {
-            width: 100%; height: 100%;
-            background: rgba(10, 10, 10, 0.9); 
-            display: flex; align-items: center; justify-content: center;
-            color: var(--gold-muted); font-size: 1.8rem; 
-            backdrop-filter: blur(5px);
+        #music-icon {
+            color: var(--gold-muted); 
+            font-size: 1.8rem; 
             font-style: normal;
         }
 
+        /* --- FOOTER --- */
         footer { 
             position: relative; 
             text-align: center; 
             padding: 120px 20px; 
             background-color: var(--forest-deep);
-            color: var(--white); 
             z-index: 200;
         }
 
@@ -266,7 +262,6 @@
             .date-display-box { gap: 30px; padding: 25px 40px; font-size: 2.2rem; }
             .hero-container h1 { font-size: 3.5rem; }
             .recs-grid { grid-template-columns: 1fr; }
-            .recommendations-area { padding: 120px 20px; }
         }
     </style>
 </head>
@@ -279,7 +274,7 @@
     </audio>
     
     <div id="music-btn-container" onclick="gestionarMusica()">
-        <div id="music-btn-ui"> static/MusicOff </div>
+        <span id="music-icon">🔇</span>
     </div>
 
     <header class="hero-layout">
@@ -301,8 +296,7 @@
             <div class="reveal">
                 <h2 class="gala-title" style="font-size: 3.5rem; color: var(--gold-bright); margin-bottom: 20px;">Generación 2021-2026</h2>
                 <p class="invitation-text">
-                    La Facultad de Ingeniería Química tiene el honor de invitarlos a celebrar el cierre de este gran ciclo académico.
-                    Es un momento para honrar el esfuerzo individual, la amistad forjada en las aulas y el inicio de una nueva etapa profesional.
+                    La Facultad de Ingeniería Química tiene el honor de invitarlos a celebrar el cierre de este gran ciclo académico. Es un momento para honrar el esfuerzo individual, la amistad forjada en las aulas y el inicio de una nueva etapa profesional.
                 </p>
                 <div class="date-display-box">
                     <span>25</span> <span>04</span> <span>26</span>
@@ -382,24 +376,22 @@
         }
 
         const audio = document.getElementById('gradAudio');
-        const btnUi = document.getElementById('music-btn-ui');
+        const icon = document.getElementById('music-icon');
 
         function gestionarMusica() {
             if (audio.paused) {
-                audio.play().then(() => {
-                    btnUi.innerHTML = "🔊";
-                }).catch(e => console.log("Click requerido"));
+                audio.play();
+                icon.innerHTML = "🔊";
             } else {
                 audio.pause();
-                btnUi.innerHTML = "🔇";
+                icon.innerHTML = "🔇";
             }
         }
 
         document.body.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play().then(() => {
-                    btnUi.innerHTML = "🔊";
-                });
+                audio.play();
+                icon.innerHTML = "🔊";
             }
         }, { once: true });
 
