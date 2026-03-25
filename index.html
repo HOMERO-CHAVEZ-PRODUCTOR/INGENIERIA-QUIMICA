@@ -118,10 +118,10 @@
             margin: 0 auto; 
         }
 
-        /* --- CONTENIDO --- */
+        /* --- CONTENIDO UNIFICADO --- */
         .unified-flow-section {
             position: relative;
-            padding: 150px 20px 100px;
+            padding: 100px 20px;
             color: var(--white);
             text-align: center;
             z-index: 150;
@@ -183,6 +183,34 @@
         }
         .btn-gold-outline:hover { background: var(--gold-muted); color: var(--dark-bg); box-shadow: 0 0 30px rgba(197, 160, 89, 0.4); }
 
+        /* --- SECCIÓN ITINERARIO (NUEVA) --- */
+        .itinerary-section {
+            position: relative;
+            padding: 100px 20px;
+            z-index: 180;
+            text-align: center;
+        }
+        .itinerary-section h3 { font-size: 3.2rem; color: var(--gold-bright); margin-bottom: 60px; }
+        
+        .itinerary-container {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .itinerary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            font-size: 1.2rem;
+            transition: 0.4s;
+        }
+        .itinerary-item:hover { color: var(--gold-bright); transform: scale(1.02); }
+        .itinerary-time { color: var(--gold-muted); font-weight: 400; min-width: 100px; text-align: left; }
+        .itinerary-desc { text-align: right; font-weight: 300; }
+
         /* --- RECOMENDACIONES --- */
         .recommendations-area {
             position: relative;
@@ -222,7 +250,7 @@
         }
         .rec-item strong { display: block; font-size: 1.3rem; margin-bottom: 12px; color: var(--gold-muted); }
 
-        /* --- BOTÓN MÚSICA REPARADO --- */
+        /* --- BOTÓN MÚSICA --- */
         #music-btn-container {
             position: fixed; 
             bottom: 40px; 
@@ -238,14 +266,8 @@
             display: flex; align-items: center; justify-content: center;
             transition: 0.3s;
         }
-        
         #music-btn-container:hover { transform: scale(1.1); border-color: var(--gold-bright); }
-
-        #music-icon {
-            color: var(--gold-muted); 
-            font-size: 1.8rem; 
-            font-style: normal;
-        }
+        #music-icon { color: var(--gold-muted); font-size: 1.8rem; font-style: normal; }
 
         /* --- FOOTER --- */
         footer { 
@@ -255,13 +277,13 @@
             background-color: var(--forest-deep);
             z-index: 200;
         }
-
         .footer-logo { font-size: 2.8rem; color: var(--gold-bright); margin-bottom: 10px; }
 
         @media (max-width: 768px) {
             .date-display-box { gap: 30px; padding: 25px 40px; font-size: 2.2rem; }
             .hero-container h1 { font-size: 3.5rem; }
             .recs-grid { grid-template-columns: 1fr; }
+            .itinerary-item { font-size: 1rem; }
         }
     </style>
 </head>
@@ -319,6 +341,23 @@
             </div>
         </div>
     </main>
+
+    <section class="itinerary-section reveal">
+        <h3 class="gala-title">Itinerario del Evento</h3>
+        <div class="itinerary-container">
+            <div class="itinerary-item"><span class="itinerary-time">06:00 PM</span><span class="itinerary-desc">Recepción</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">07:00 PM</span><span class="itinerary-desc">Cena</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">08:00 PM</span><span class="itinerary-desc">Pase de Lista</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">08:05 PM</span><span class="itinerary-desc">Palabras</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">08:10 PM</span><span class="itinerary-desc">Brindis</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">08:15 PM</span><span class="itinerary-desc">Apertura de Pista</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">09:00 PM</span><span class="itinerary-desc">Carrito de Shots</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">10:00 PM</span><span class="itinerary-desc">Tornafiesta</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">11:00 PM</span><span class="itinerary-desc">After & Barra de Bebidas</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">12:30 AM</span><span class="itinerary-desc">Sorpresa Animada</span></div>
+            <div class="itinerary-item"><span class="itinerary-time">02:00 AM</span><span class="itinerary-desc">Fin del Evento</span></div>
+        </div>
+    </section>
 
     <section class="recommendations-area">
         <div class="recommendations-content reveal">
